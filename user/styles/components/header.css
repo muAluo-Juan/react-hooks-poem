@@ -1,9 +1,9 @@
 /**导航栏样式*/
 .header{
     background-color: #fff;
-    padding: .4rem;
+    padding: .6rem;
     overflow: hidden;
-    height: 3.6rem;
+    height: 3.8rem;
     border-bottom: 1px solid #eee;
     width: 100%;
     position: fixed;
@@ -14,7 +14,8 @@
 
 .header-logo{
     color: black;
-    width: 3.6rem;
+    height: 2.6rem;
+    font-size: 2rem;
 }
 
 .header-txt{
@@ -24,10 +25,18 @@
     padding-left: .5rem;
 }
 .ant-menu{
-    line-height: 2.8rem;
+    line-height: 3.0rem;
 }
 .ant-menu-item{
     font-size: .9rem !important;
     padding-left: 1rem;
     padding-right: 1rem;
+}
+.search{
+    width:14rem;
+    line-height: 2.8rem;
+    margin-right: 2.5rem;
+}
+.btn-user{
+    margin-left: 1rem;
 }
