@@ -64,20 +64,21 @@ export default function Home(list) {
               )}
             /> */}
           <Row type="flex" justify="center">
-            <Col xs={18} sm={18} md={12} lg={12} xl={12}>
+            <Col xs={18} sm={18} md={12} lg={12} xl={16}>
               <Carousel autoplay>
                 <div>
-                  <h3><img src="" alt="logo" /></h3>
+                  <h3><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c1.jpg" alt="c1" /></h3>
                 </div>
                 <div>
-                  <h3><img src="" alt="logo" /></h3>
+                  <h3><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c2.jpg" alt="c2" /></h3>
                 </div>
                 <div>
-                  <h3><img src="" alt="logo" /></h3>
+                  <h3><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c3.jpg" alt="c3" /></h3>
                 </div>
               </Carousel>
             </Col>
-            <Col xs={6} sm={6} md={4} lg={4} xl={4}>
+            <Col xs={18} sm={18} md={12} lg={12} xl={1}></Col>
+            <Col xs={6} sm={6} md={4} lg={4} xl={7}>
               呸
               </Col>
           </Row>
