@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Header from '../components/Header'
 import Link from 'next/link'
-import { List, Icon, Row, Col, Carousel, Divider } from 'antd'
+import { List, Icon, Row, Col, Carousel, Divider, Button } from 'antd'
 import { useState } from 'react'
 import axios from 'axios'
 import Author from '../components/Author'
@@ -88,15 +88,34 @@ export default function Home(list) {
                 <Divider orientation="left" plain>
                   精选专题
                 </Divider>
-                <img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c4.jpg" width="100%" />
-                <img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c4.jpg" width="100%" />
-                <img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c4.jpg" width="100%" />
+                <div className="special-div">
+                  <div><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c7.jpg" /><p>描写山的诗词</p></div>
+                  <div><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c8.jpg" /><p>描写节气的诗词</p></div>
+                  <div><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c9.jpg" /><p>描写节日的诗词</p></div>
+                  <div><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c10.jpg" /><p>描写建筑的诗词</p></div>
+                </div>
+                <Button className="more-btn" size="small">全部专题</Button>
+              </div>
+              <div>
+                <Divider orientation="left" plain>
+                  诗友天地
+                </Divider>
+                <div className="special-div">
+                  <div><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c7.jpg" /><p>描写山的诗词</p></div>
+                  <div><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c8.jpg" /><p>描写节气的诗词</p></div>
+                  <div><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c9.jpg" /><p>描写节日的诗词</p></div>
+                  <div><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c10.jpg" /><p>描写建筑的诗词</p></div>
+                </div>
               </div>
             </Col>
           </Row>
         </Col>
         <Col className="comm-right" xs={0} sm={0} md={5} lg={5} xl={5}>
-          <Author />
+        <div className="author-div comm-box">
+            <div>
+                
+            </div>
+        </div>
           <Advertise />
         </Col>
       </Row>
