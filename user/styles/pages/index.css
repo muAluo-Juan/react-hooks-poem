@@ -43,12 +43,21 @@ code {
     line-height: 21rem;
     background: #364d79;
     overflow: hidden;
-  }
+    border-radius: .3rem;
+}
   
-  .ant-carousel .slick-slide h3 {
+.ant-carousel .slick-slide h3 {
     color: #fff;
-  }
-  .ant-carousel .slick-slide h3  img{
+    
+}
+.ant-carousel .slick-slide h3 img{
     width:100%;
     height:100%;
-   }
+    
+}
+.ad{
+    border-radius: .3rem;
+    overflow: hidden;
+    width: 100%;
+    height: 6.5rem;
+}

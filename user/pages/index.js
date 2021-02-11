@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Header from '../components/Header'
 import Link from 'next/link'
-import { List, Icon, Row, Col, Carousel } from 'antd'
+import { List, Icon, Row, Col, Carousel, Divider } from 'antd'
 import { useState } from 'react'
 import axios from 'axios'
 import Author from '../components/Author'
@@ -64,7 +64,7 @@ export default function Home(list) {
               )}
             /> */}
           <Row type="flex" justify="center">
-            <Col xs={18} sm={18} md={12} lg={12} xl={16}>
+            <Col xs={18} sm={18} md={12} lg={12} xl={18}>
               <Carousel autoplay>
                 <div>
                   <h3><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c1.jpg" alt="c1" /></h3>
@@ -78,9 +78,21 @@ export default function Home(list) {
               </Carousel>
             </Col>
             <Col xs={18} sm={18} md={12} lg={12} xl={1}></Col>
-            <Col xs={6} sm={6} md={4} lg={4} xl={7}>
-              呸
-              </Col>
+            <Col xs={6} sm={6} md={4} lg={4} xl={5}>
+              <div className="ad"><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c4.jpg" width="100%" /></div>
+              <div className="ad" style={{ marginTop: "0.8rem" }}><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c5.jpg" width="100%" /></div>
+              <div className="ad" style={{ marginTop: "0.8rem" }}><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c6.jpg" width="100%" /></div>
+            </Col>
+            <Col>
+              <div>
+                <Divider orientation="left" plain>
+                  精选专题
+                </Divider>
+                <img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c4.jpg" width="100%" />
+                <img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c4.jpg" width="100%" />
+                <img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c4.jpg" width="100%" />
+              </div>
+            </Col>
           </Row>
         </Col>
         <Col className="comm-right" xs={0} sm={0} md={5} lg={5} xl={5}>
