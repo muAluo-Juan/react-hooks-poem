@@ -1,13 +1,14 @@
 import Head from 'next/head'
 import Header from '../components/Header'
 import Link from 'next/link'
-import { List, Icon, Row, Col, Carousel, Divider, Button, Tag } from 'antd'
+import { Icon, Row, Col, Carousel, Divider, Button, Avatar } from 'antd'
 import { useState } from 'react'
 import axios from 'axios'
-import Author from '../components/Author'
-import Advertise from '../components/Advertise'
 import Footer from '../components/Footer'
+import PoetMatesIndex from '../components/PoetMatesIndex'
+import CommonContext from '../components/CommonContext'
 import '../styles/pages/index.css'
+import '../styles/components/author.css'
 
 import servicePath from '../config/apiUrl'
 
@@ -15,34 +16,45 @@ import servicePath from '../config/apiUrl'
 import marked, { Renderer } from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
+import create from 'antd/lib/icon/IconFont'
 
 export default function Home(list) {
   const [poet, setPoet] = useState(['李白', '杜甫', '猪八戒', '孙悟空', '唐僧', '沙悟净', '纳兰性德', '更多...'])
   const [poetMates, setPoetMates] = useState([
-    {id:1, userName:'元川居安1', score:998, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安2', score:785, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安3', score:770, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安4', score:650, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安5', score:550, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安6', score:500, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安7', score:450, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安8', score:400, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'}
+    { id: 1, userName: '元川居安1', score: 20, avatar: 'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg' },
+    { id: 2, userName: '笑死我了好', score: 75, avatar: 'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg' },
+    { id: 3, userName: '元川居安3', score: 30, avatar: 'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg' },
+    { id: 4, userName: '元川居安4', score: 60, avatar: 'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg' },
+    { id: 5, userName: '元川居安5', score: 50, avatar: 'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg' }
   ])
-  const [mylist, setMylist] = useState(list.data)
-  console.log(list.data)
-  const renderer = new marked.Renderer()
-  marked.setOptions({
-    renderer: renderer,
-    gfm: true,
-    pedantic: false,  //容错
-    sanitize: false,//忽略html原始标签
-    tables: true,//tables为true,gfm一定要写上
-    breaks: false,//换行符
-    smartLists: true,//自动渲染列表
-    highlight: function (code) {//怎么高亮
-      return hljs.highlightAuto(code).value
-    }
-  })
+  const listData = [];
+  for (let i = 0; i < 3; i++) {
+    listData.push({
+      href: 'http://ant.design',
+      title: `ant design part ${i}`,
+      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+      description:
+        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+      content:
+        'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+    });
+  }
+
+  // const [mylist, setMylist] = useState(list.data)
+  // console.log(list.data)
+  // const renderer = new marked.Renderer()
+  // marked.setOptions({
+  //   renderer: renderer,
+  //   gfm: true,
+  //   pedantic: false,  //容错
+  //   sanitize: false,//忽略html原始标签
+  //   tables: true,//tables为true,gfm一定要写上
+  //   breaks: false,//换行符
+  //   smartLists: true,//自动渲染列表
+  //   highlight: function (code) {//怎么高亮
+  //     return hljs.highlightAuto(code).value
+  //   }
+  // })
   return (
     <div>
       <Head>
@@ -51,31 +63,8 @@ export default function Home(list) {
       <Header />
       <Row className="comm-main" type="flex" justify="center">
         <Col className="comm-left" xs={24} sm={24} md={16} lg={16} xl={16}>
-          {/* <List
-              header={<div>最新日志</div>}
-              itemLayout="vertical"
-              dataSource={mylist}
-              renderItem={item => (
-                <List.Item>
-                  <div className="list-title">
-                    <Link href={{ pathname: '/detailed', query: { id: item.id } }}>
-                      <a>{item.title}</a>
-                    </Link>
-                  </div>
-                  <div className="list-icon">
-                    <span><Icon type="calendar" /> {item.addTime}</span>
-                    <span><Icon type="folder" />{item.typeName}</span>
-                    <span><Icon type="fire" /> {item.view_count}</span>
-                  </div>
-                  <div className="list-context"
-                    dangerouslySetInnerHTML={{ __html: marked(item.introduce) }}
-                  >
-                  </div>
-                </List.Item>
-              )}
-            /> */}
           <Row type="flex" justify="center">
-            {/* <Col xs={18} sm={18} md={12} lg={12} xl={18}>
+            <Col xs={18} sm={18} md={12} lg={12} xl={18}>
               <Carousel autoplay>
                 <div>
                   <h3><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c1.jpg" alt="c1" /></h3>
@@ -93,7 +82,7 @@ export default function Home(list) {
               <div className="ad"><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c4.jpg" width="100%" /></div>
               <div className="ad" style={{ marginTop: "0.8rem" }}><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c5.jpg" width="100%" /></div>
               <div className="ad" style={{ marginTop: "0.8rem" }}><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c6.jpg" width="100%" /></div>
-            </Col> */}
+            </Col>
             <Col>
               <div>
                 <Divider orientation="left" plain>
@@ -107,13 +96,33 @@ export default function Home(list) {
                 </div>
                 <Button className="more-btn" size="small">全部专题</Button>
               </div>
+              <Divider orientation="left" plain>
+                  <h3>推荐诗词</h3>
+                </Divider>
+                <div className="recommend-poem-div">
+                  <div>《烛影摇红·工》明代 · 夏侯淳</div>
+                  <div>《烛影工》明代 · 夏侯淳</div>
+                  <div>《烛影摇红·辜负天工》明代 · 夏侯淳</div>
+                  <div>《烛影摇红·辜负天工》明代 · 夏侯淳</div>
+                  <div>《烛影摇红·辜负天工》明代 · 夏侯淳</div>
+                  <div>《烛影摇红·辜负天工》明代 · 夏侯淳</div>
+                  <div>《烛影摇红·辜负天工》明代 · 夏侯淳</div>
+                  <div>《烛影摇红·辜负天工》明代 · 夏侯淳</div>
+                  <div>《红·辜负天工》明代 · 夏侯淳</div>
+                  <div>《烛影摇红·辜负天工》明代 · 夏侯淳</div>
+                  <div>《烛影摇红·辜负天工》明代 · 夏侯淳</div>
+                  <div>《烛影摇红·辜负天工》明代 · 夏侯淳</div>
+                </div>
               <div>
                 <Divider orientation="left" plain>
                   <h3>诗友天地</h3>
                 </Divider>
-                <div className="special-div">
-
+                <div className="poetmates-index">
+                  <CommonContext.Provider value={listData}>
+                    <PoetMatesIndex/>
+                  </CommonContext.Provider>
                 </div>
+                <Button className="all-btn" size="small">更多文章</Button>
               </div>
             </Col>
           </Row>
@@ -143,19 +152,26 @@ export default function Home(list) {
           </div>
           <div className="ad-div comm-box">
             <Divider orientation="center" plain>
-              <h3>社区周榜</h3>
+              <h3>活跃诗友</h3>
             </Divider>
-            <div className="poetry-div">
-              {
-                poet.map((item) => {
-                  return (
-                    <div>
-                      {item}
+            {
+              poetMates.map((item) => {
+                return (
+                  <div className="poetmates-list">
+                    <div className="poetmates-list-rank-div">{item.id}</div>
+                    <div className="poetmates-list-username-div">
+                      <Avatar size={45} src={item.avatar} />
+                      <div>{item.userName}</div>
+                      <span className="poetmates-list-username-tag">探花</span>
                     </div>
-                  )
-                })
-              }
-            </div>
+                    <div className="poetmates-list-score-div">
+                      <Icon type="like" />
+                      <div>{item.score}</div>
+                    </div>
+                  </div>
+                )
+              })
+            }
           </div>
         </Col>
       </Row>

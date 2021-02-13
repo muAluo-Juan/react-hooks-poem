@@ -112,7 +112,79 @@ code {
     text-align: center;
     margin-top: 0.5rem;
     padding: 0.2rem;
-    border: 1px solid #ff7875;
-    color: #ff7875;
+    border: 1px solid #cd201f;
+    color: #cd201f;
     cursor: pointer;
+}
+.poetmates-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 0.3rem;
+    justify-content: space-around;
+}
+.poetmates-list-rank-div{
+    font-weight: bold;
+    width: 5%;
+}
+.poetmates-list-score-div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    font-weight: bold;
+    /* color: #cd201f; */
+    width: 15%;
+}
+.poetmates-list-score-div div{
+    margin-left: 0.3rem;
+}
+.poetmates-list-username-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    width: 60%;
+}
+
+.poetmates-list-username-div:hover{
+    color: #55acee;
+}
+.poetmates-list-username-div div{
+    width: 50%;
+    text-overflow:ellipsis;
+    white-space:nowrap 
+}
+.poetmates-list-username-tag{
+    text-align: center;
+    width: 15%;
+    background-color: #55acee;
+    color: white;
+    font-size:0.7rem;
+    border-radius:3px;
+}
+.poetmates-index{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.all-btn{
+    float: right;
+    font-size: 0.8rem;
+    margin-bottom: 0.7rem;
+}
+.recommend-poem-div{
+    padding-left: 3rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.recommend-poem-div div{
+    width: 33.3%;
+    margin-bottom: 0.3rem;
+    cursor: pointer;
+}
+.recommend-poem-div div:hover{
+    color: #cd201f;
 }
