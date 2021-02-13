@@ -19,16 +19,14 @@ import 'highlight.js/styles/monokai-sublime.css'
 export default function Home(list) {
   const [poet, setPoet] = useState(['李白', '杜甫', '猪八戒', '孙悟空', '唐僧', '沙悟净', '纳兰性德', '更多...'])
   const [poetMates, setPoetMates] = useState([
-    {id:1, userName:'元川居安1', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安2', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安3', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安4', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安5', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安6', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安7', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安8', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安9', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
-    {id:1, userName:'元川居安10', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'}
+    {id:1, userName:'元川居安1', score:998, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安2', score:785, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安3', score:770, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安4', score:650, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安5', score:550, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安6', score:500, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安7', score:450, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安8', score:400, avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'}
   ])
   const [mylist, setMylist] = useState(list.data)
   console.log(list.data)
@@ -145,7 +143,7 @@ export default function Home(list) {
           </div>
           <div className="ad-div comm-box">
             <Divider orientation="center" plain>
-              <h3>活跃诗友</h3>
+              <h3>社区周榜</h3>
             </Divider>
             <div className="poetry-div">
               {
