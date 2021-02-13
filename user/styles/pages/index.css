@@ -68,6 +68,7 @@ code {
     width: 24.5%;
     border-radius:5px;
     position: relative;
+    cursor: pointer;
 }
 .special-div div img{
     width: 100%;
@@ -92,11 +93,26 @@ code {
     font-size:.8rem;
     color: #999;
 }
-.poetry-div{
+.poet-div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content:space-between;
 }
-.poetry-div div{
+.poet-div div{
     width: 30%;
     text-align: center;
+    margin-top: 0.5rem;
+    padding: 0.2rem;
+    border: 1px solid #eee;
 }
-
+.poet-div div:hover{
+    width: 30%;
+    text-align: center;
+    margin-top: 0.5rem;
+    padding: 0.2rem;
+    border: 1px solid #ff7875;
+    color: #ff7875;
+    cursor: pointer;
+}

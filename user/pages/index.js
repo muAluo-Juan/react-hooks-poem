@@ -17,7 +17,19 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
 
 export default function Home(list) {
-  const [poet, setPoet] = useState(['李白', '杜甫', '猪八戒', '孙悟空', '唐僧', '沙悟净', '纳兰性德'])
+  const [poet, setPoet] = useState(['李白', '杜甫', '猪八戒', '孙悟空', '唐僧', '沙悟净', '纳兰性德', '更多...'])
+  const [poetMates, setPoetMates] = useState([
+    {id:1, userName:'元川居安1', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安2', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安3', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安4', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安5', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安6', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安7', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安8', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安9', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'},
+    {id:1, userName:'元川居安10', avator:'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg'}
+  ])
   const [mylist, setMylist] = useState(list.data)
   console.log(list.data)
   const renderer = new marked.Renderer()
@@ -111,13 +123,29 @@ export default function Home(list) {
         <Col className="comm-right" xs={0} sm={0} md={5} lg={5} xl={5}>
           <div className="author-div comm-box">
             <div>
-              <img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/wechat.jpg"></img>
+              <img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/groupchat.jpg"></img>
               <p>扫一扫加入群聊，与诗友一道谈古论今</p>
             </div>
           </div>
           <div className="ad-div comm-box">
             <Divider orientation="center" plain>
               <h3>著名诗人</h3>
+            </Divider>
+            <div className="poet-div">
+              {
+                poet.map((item) => {
+                  return (
+                    <div>
+                      {item}
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </div>
+          <div className="ad-div comm-box">
+            <Divider orientation="center" plain>
+              <h3>活跃诗友</h3>
             </Divider>
             <div className="poetry-div">
               {
