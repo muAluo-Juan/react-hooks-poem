@@ -1,6 +1,6 @@
 pre{
     display: block;
-    background-color: #283646 !important;
+    background-color: #5b6168 !important;
      padding: .5rem !important;
      overflow-y: auto;
      font-weight: 300;
@@ -84,3 +84,19 @@ code {
     margin-top: 0.5rem;
     font-size: 0.8rem;
 }
+.author-div img{
+    width: 60%;
+}
+.author-div p{
+    margin-top: 0.8rem;
+    font-size:.8rem;
+    color: #999;
+}
+.poetry-div{
+    justify-content:space-between;
+}
+.poetry-div div{
+    width: 30%;
+    text-align: center;
+}
+
