@@ -180,15 +180,15 @@ export default function Home(list) {
   )
 }
 
-Home.getInitialProps = async () => {
-  const promise = new Promise((resolve) => {
-    axios(servicePath.getArticleList)
-      .then(
-        (res) => {
-          console.log("----------->", res.data)
-          resolve(res.data)
-        }
-      )
-  })
-  return await promise//async必须有返回值
-}
+// Home.getInitialProps = async () => {
+//   const promise = new Promise((resolve) => {
+//     axios(servicePath.getArticleList)
+//       .then(
+//         (res) => {
+//           console.log("----------->", res.data)
+//           resolve(res.data)
+//         }
+//       )
+//   })
+//   return await promise//async必须有返回值
+// }

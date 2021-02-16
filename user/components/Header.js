@@ -11,10 +11,10 @@ import servicePath from '../config/apiUrl'
 const Header = () => {
     //getInitialProps不能在子组件中使用
     const [navArray, setNavArray] = useState([
-        { id: '0', icon: 'home', typeName: '首页' },
-        { id: '1', icon: 'read', typeName: '诗词' },
-        { id: '2', icon: 'highlight', typeName: '社区' },
-        { id: '3', icon: 'question-circle', typeName: '问答' }
+        { path: 'index', icon: 'home', typeName: '首页' },
+        { path: 'poem', icon: 'read', typeName: '诗词' },
+        { path: 'community', icon: 'highlight', typeName: '社区' },
+        { path: 'question', icon: 'question-circle', typeName: '问答' }
     ])  //初始值为空
     const {Search} = Input //搜索框
 
@@ -37,10 +37,10 @@ const Header = () => {
 
     const handleClickNav = (e) => {
         //e可以获取Ant Design中的menu传递来的key值
-        if (e.key == 0) {
+        if (e.key == 'index') {
             Router.push('/')
         } else {
-            Router.push('/list?id=' + e.key)
+            Router.push('/'+e.key)
         }
     }
 
@@ -51,15 +51,11 @@ const Header = () => {
                     <img className="header-logo" src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/logo.png" alt="夜雨时" />
                 </Col>
                 <Col xs={22} sm={22} md={8} lg={10} xl={11}>
-                    <Menu mode="horizontal" onClick={handleClickNav} defaultSelectedKeys={['0']}>
-                        {/* <Menu.Item key="0">
-                            <Icon type="read"/>
-                            诗词大全
-                        </Menu.Item> */}
+                    <Menu mode="horizontal" onClick={handleClickNav} defaultSelectedKeys={['index']}>
                         {
                             navArray.map((item) => {
                                 return (
-                                    <Menu.Item key={item.id}>
+                                    <Menu.Item key={item.path}>
                                         <Icon type={item.icon} />
                                         {item.typeName}
                                     </Menu.Item>

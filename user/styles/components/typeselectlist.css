@@ -1,0 +1,25 @@
+.type-select-list-div{
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:inherit;
+}
+.type-select-list-div div{
+    width: 4%;
+    font-weight: bold;
+}
+.type-select-list-div ul{
+    width: 93%;
+    list-style: none;
+    padding-left: 0em;
+}
+.type-select-list-div ul li{
+    float: left;
+    width: 6%;
+    cursor:pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-left: 0.3rem;
+}
