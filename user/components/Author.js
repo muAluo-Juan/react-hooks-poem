@@ -1,20 +1,25 @@
 import React from 'react'
-import {Avatar,Divider} from 'antd'
+import { Avatar, Divider, Badge } from 'antd'
 import '../styles/components/author.css'
 
-const Author = ()=>{
+const Author = () => {
     return (
         <div className="author-div comm-box">
-            <div>
-                <Avatar size={100} src="https://gitee.com/muAluo/rainyNightPoemsVue/raw/master/img/w4.jpg"/>
+            <div className="author-avatar">
+                <Badge count={'童生'}><Avatar size={100} src="https://gitee.com/muAluo/rainyNightPoemsVue/raw/master/img/w4.jpg" /></Badge>
             </div>
+            <div>元川居安</div>
             <div className="author-introduction">
-                大家好我是元川居安，我知道你看照片就喜欢上我了。那我就不过多介绍自己了，怕你爱上我，因为我是仙女不能和凡人恋爱的。
-                <Divider>社交账号</Divider>
-                <Avatar size={28} icon="github" className="account"/>
-                <Avatar size={28} icon="qq" className="account"/>
-                <Avatar size={28} icon="wechat" className="account"/>
+                间歇性失忆患者
             </div>
+            <Divider />
+            <span className="author-message">
+                <span><p>18</p><p style={{ color: '#999' }}>积分</p></span>
+                <span><p>22</p><p style={{ color: '#999' }}>粉丝</p></span>
+                <span><p>22</p><p style={{ color: '#999' }}>获赞</p></span>
+                <span><p>22</p><p style={{ color: '#999' }}>收藏</p></span>
+                <span><p>22</p><p style={{ color: '#999' }}>评论</p></span>
+            </span>
         </div>
     )
 }

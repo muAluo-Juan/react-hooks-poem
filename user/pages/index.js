@@ -39,6 +39,8 @@ export default function Home(list) {
         'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
     });
   }
+  const pagination=null
+  const data = [pagination,listData]
 
   // const [mylist, setMylist] = useState(list.data)
   // console.log(list.data)
@@ -58,7 +60,7 @@ export default function Home(list) {
   return (
     <div>
       <Head>
-        <title>夜雨时</title>
+        <title>夜雨时首页</title>
       </Head>
       <Header />
       <Row className="comm-main" type="flex" justify="center">
@@ -118,7 +120,7 @@ export default function Home(list) {
                   <h3>诗友天地</h3>
                 </Divider>
                 <div className="poetmates-index">
-                  <CommonContext.Provider value={listData}>
+                  <CommonContext.Provider value={data}>
                     <PoetMatesIndex/>
                   </CommonContext.Provider>
                 </div>

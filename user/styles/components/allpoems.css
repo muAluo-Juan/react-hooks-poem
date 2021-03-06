@@ -1,8 +1,10 @@
 .allpoems-div{
-    padding-left: 0.2rem;
-    padding-right: 0.2rem;
-}
-.allpoems-div-poemcontent{
+    /* padding-left: 0.2rem;
+    padding-right: 0.2rem; */
     padding-left: 1rem;
     padding-right: 1rem;
 }
+/* .allpoems-div-poemcontent{
+    padding-left: 1rem;
+    padding-right: 1rem;
+} */

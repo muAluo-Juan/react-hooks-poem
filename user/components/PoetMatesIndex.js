@@ -10,11 +10,15 @@ const IconText = ({ type, text }) => (
   </span>
 )
 function PoetMatesIndex() {
-  let listData = useContext(CommonContext)
+  let data = useContext(CommonContext)
+  let pagination = data[0]
+  let listData = data[1]
+
   return (
     <List
       itemLayout="vertical"
       size="large"
+      pagination={pagination}
       dataSource={listData}
       renderItem={item => (
         <List.Item

@@ -1,0 +1,30 @@
+.demo-loading {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+  }
+  .question-list-left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .question-list-left div{
+    margin-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .des{
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
+  }
+  .question-content-content{
+    /* color: black; */
+    width: 50rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .question-content h3:hover{
+    color: #cd201f;
+  }

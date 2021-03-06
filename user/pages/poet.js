@@ -1,21 +1,22 @@
 import Head from 'next/head'
 import Header from '../components/Header'
-import { Row, Col } from 'antd'
+import { Row, Col, Tabs, Radio } from 'antd'
 import Footer from '../components/Footer'
 import '../styles/components/author.css'
-import AllPoems from '../components/AllPoems'
-import '../styles/pages/comm.css'
+import AllPoets from '../components/AllPoets'
+
+const { TabPane } = Tabs;
 
 export default function Poem() {
     return (
         <div>
             <Head>
-                <title>夜雨时古诗词大全</title>
+                <title>夜雨时诗人一览</title>
             </Head>
             <Header />
             <Row className="comm-main" type="flex" justify="center">
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={16} xl={16}>
-                    <AllPoems/>
+                    <AllPoets/>
                 </Col>
                 <Col className="comm-right" xs={0} sm={0} md={5} lg={5} xl={5}>
                     <div className="author-div comm-box">

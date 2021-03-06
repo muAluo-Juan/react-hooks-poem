@@ -5,21 +5,21 @@ import axios from 'axios'
 import servicePath from '../config/apiUrl'
 import '../styles/components/typeselectlist.css'
 
-const TypeSelectList = ()=>{
+const PoetSelectList = ()=>{
     const [iconType, setIconType] = useState('down')
     const [chosenType, setChosenType] = useState(0)
-    const [typeType, setTypeType] = useState([])
+    const [poetType, setPoetType] = useState([])
     useEffect(()=>{
-        getTypeList()
+        getPoetList()
     },[])
-    const getTypeList = ()=>{
+    const getPoetList = ()=>{
         axios({
             method: 'get',
-            url: servicePath.getTypeList,
+            url: servicePath.getPoetList,
             withCredentials: true
         }).then(
             res=>{
-                setTypeType(res.data.data)
+                setPoetType(res.data.data)
             }
         )
     }
@@ -37,10 +37,10 @@ const TypeSelectList = ()=>{
     }
     return (
         <div className="type-select-list-div">
-            <div><span>类别 :</span></div>
+            <div><span>诗人 :</span></div>
             <ul>
                 {
-                    typeType.map((item, index) => {
+                    poetType.map((item, index) => {
                         return (
                             <li
                                 title={item.name}
@@ -61,11 +61,11 @@ const TypeSelectList = ()=>{
             </ul>
             <Icon
                 type={iconType}
-                style={{ visibility: typeType.length > 14 ? "visible" : "hidden", cursor: "pointer", width: "3%" }}
+                style={{ visibility: poetType.length > 14 ? "visible" : "hidden", cursor: "pointer", width: "3%" }}
                 onClick={openAll}
             >
             </Icon>
         </div>
     )
 }
-export default TypeSelectList
+export default PoetSelectList

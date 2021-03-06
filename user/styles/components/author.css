@@ -1,12 +1,12 @@
 .author-div{
     text-align: center;
     padding: 1rem;
-
+    margin-bottom: 0.5rem;
 }
 .author-div div{
-    margin-bottom: 1rem;
-
+    margin-bottom: 0.8rem;
 }
+
 .author-introduction{
     font-size:.8rem;
     color: #999;
@@ -15,4 +15,17 @@
     background-color: #999;
     margin-left: .5rem;
     margin-right: .5rem;
+}
+.author-avatar{
+    margin-top: 0.8rem;
+}
+.author-message{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.extra{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

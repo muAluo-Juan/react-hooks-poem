@@ -1,25 +1,25 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import CommonContext from '../components/CommonContext'
 import { Icon } from 'antd'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
 import '../styles/components/typeselectlist.css'
 
-const TypeSelectList = ()=>{
+export default function DynastySelectList() {
     const [iconType, setIconType] = useState('down')
     const [chosenType, setChosenType] = useState(0)
-    const [typeType, setTypeType] = useState([])
+    const [dynastyType, setDynastyType] = useState([])
     useEffect(()=>{
-        getTypeList()
+        getDynastyList()
     },[])
-    const getTypeList = ()=>{
+    const getDynastyList = ()=>{
         axios({
             method: 'get',
-            url: servicePath.getTypeList,
+            url: servicePath.getDynastyList,
             withCredentials: true
         }).then(
             res=>{
-                setTypeType(res.data.data)
+                setDynastyType(res.data.data)
             }
         )
     }
@@ -37,10 +37,10 @@ const TypeSelectList = ()=>{
     }
     return (
         <div className="type-select-list-div">
-            <div><span>类别 :</span></div>
+            <div><span>朝代 :</span></div>
             <ul>
                 {
-                    typeType.map((item, index) => {
+                    dynastyType.map((item, index) => {
                         return (
                             <li
                                 title={item.name}
@@ -61,11 +61,10 @@ const TypeSelectList = ()=>{
             </ul>
             <Icon
                 type={iconType}
-                style={{ visibility: typeType.length > 14 ? "visible" : "hidden", cursor: "pointer", width: "3%" }}
+                style={{ visibility: dynastyType.length > 14 ? "visible" : "hidden", cursor: "pointer", width: "3%" }}
                 onClick={openAll}
             >
             </Icon>
         </div>
     )
 }
-export default TypeSelectList

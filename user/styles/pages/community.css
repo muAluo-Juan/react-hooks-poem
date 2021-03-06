@@ -1,0 +1,11 @@
+.left-content{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+}
+.nav-choose{
+    margin-top: 0.5rem;
+}
+.nav-choose a{
+    color:rgba(0, 0, 0, 0.45);
+}

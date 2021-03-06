@@ -10,13 +10,8 @@ import servicePath from '../config/apiUrl'
 
 const Header = () => {
     //getInitialProps不能在子组件中使用
-    const [navArray, setNavArray] = useState([
-        { path: 'index', icon: 'home', typeName: '首页' },
-        { path: 'poem', icon: 'read', typeName: '诗词' },
-        { path: 'community', icon: 'highlight', typeName: '社区' },
-        { path: 'question', icon: 'question-circle', typeName: '问答' }
-    ])  //初始值为空
-    const {Search} = Input //搜索框
+    const { Search } = Input //搜索框
+    const { SubMenu } = Menu;
 
     //待解决
     // const [nowNav,setNowNav] = useState('0')
@@ -34,16 +29,26 @@ const Header = () => {
     //     // fetchData() //让它执行
     //     setNavArray('诗词鉴赏')
     // },[])
+    const [current,setCurrent] = useState('index')
 
-    const handleClickNav = (e) => {
-        //e可以获取Ant Design中的menu传递来的key值
-        if (e.key == 'index') {
+    const handlerClickNav = (e) => {
+        // console.log("之前的"+current)
+        // setCurrent(e.key)//导航跳来跳去，未解决
+        // console.log("现在的"+current)
+        if(e.key == 'index')
             Router.push('/')
-        } else {
-            Router.push('/'+e.key)
-        }
+        else
+            Router.push('/' + e.key)
     }
 
+    useEffect(()=>{
+        let pathname = window.location.pathname.replace("/","")
+        if(pathname == "")
+            pathname = "index"
+        setCurrent(pathname)
+        console.log(pathname)
+    })
+  
     return (
         <div className="header">
             <Row type="flex" justify="center">
@@ -51,17 +56,30 @@ const Header = () => {
                     <img className="header-logo" src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/logo.png" alt="夜雨时" />
                 </Col>
                 <Col xs={22} sm={22} md={8} lg={10} xl={11}>
-                    <Menu mode="horizontal" onClick={handleClickNav} defaultSelectedKeys={['index']}>
-                        {
-                            navArray.map((item) => {
-                                return (
-                                    <Menu.Item key={item.path}>
-                                        <Icon type={item.icon} />
-                                        {item.typeName}
-                                    </Menu.Item>
-                                )
-                            })
-                        }
+                    <Menu mode="horizontal" selectedKeys={[current]} onClick={handlerClickNav}>
+                        <Menu.Item key="index" >
+                            <Icon type="home" />
+                            首页
+                        </Menu.Item>
+                        <SubMenu
+                            title={
+                                <span>
+                                    <Icon type="read" />
+                                    诗词
+                                </span>
+                            }
+                        >
+                            <Menu.Item key="poem">诗词大全</Menu.Item>
+                            <Menu.Item key="poet">诗人一览</Menu.Item>
+                        </SubMenu>
+                        <Menu.Item key="community">
+                            <Icon type="smile" />
+                            社区
+                        </Menu.Item>
+                        <Menu.Item key="question">
+                            <Icon type="question-circle" />
+                            问答
+                        </Menu.Item>
                     </Menu>
                 </Col>
                 <Col xs={0} sm={0} md={14} lg={10} xl={8}>
