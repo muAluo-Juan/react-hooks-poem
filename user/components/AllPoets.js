@@ -1,34 +1,57 @@
-import {useState, setState} from 'react'
-import TypeSelectList from './TypeSelectList'
 import '../styles/components/allpoems.css'
-import CommonContext from './CommonContext'
+import {useEffect, useState } from 'react'
 import PoetIntro from './PoetIntro'
 import { Divider } from 'antd'
+import servicePath from '../config/apiUrl'
+import axios from 'axios'
+import DynastySelectList from '../components/DynastySelectList'
+import CommonContext from './CommonContext'
 
 const Poet=()=>{
-    const [dynastyType, setDynastyType] = useState([
-        {id:'0', value:'不限'},
-        {id:'1', value:'战国'},
-        {id:'2', value:'春秋'},
-        {id:'3', value:'秦朝'},
-        {id:'4', value:'汉朝'},
-        {id:'5', value:'唐朝'},
-        {id:'6', value:'宋朝'},
-        {id:'7', value:'元朝'},
-        {id:'8', value:'明朝'},
-        {id:'9', value:'清朝'},
-        {id:'10', value:'中华人民共和国'}
-    ])
-    const dynastyContext = ['朝代',dynastyType]
+    const [poets,setPoets] = useState([])
+    const [poetList,setPoetList] = useState([])
+    const [dynasty,setDynasty] = useState(0)
+    const pagination = {
+        onChange: page => {
+            console.log(page);
+        },
+        pageSize: 10,
+    }
+
+    useEffect(()=>{
+        getPoetList()
+    },[])
+
+    const getPoetList = ()=>{
+        axios({
+            method: 'get',
+            url: servicePath.getPoetList,
+            withCredentials:true
+        }).then(
+            res=>{
+                setPoets(res.data.data)
+                setPoetList(res.data.data)
+            }
+        )
+    }
+
+    useEffect(() => {
+        if (poetList.length != 0) {
+            let temp = []
+            for (let i = 0; i < poetList.length; i++)
+                if (dynasty == 0 || dynasty == poetList[i].dynastyid)
+                    temp.push(poetList[i])
+            setPoets(temp)
+        }
+    }, [dynasty])
 
     return (
         <div className="allpoems-div">
+            <DynastySelectList setDynasty={setDynasty}/>
             <Divider></Divider>
-            <CommonContext.Provider value={dynastyContext}>
-                <TypeSelectList/>
+            <CommonContext.Provider value={{poets,pagination}}>
+                <PoetIntro/>
             </CommonContext.Provider>
-            <Divider></Divider>
-            <div className="allpoems-div-poemcontent"><PoetIntro/></div>
         </div>
     )
 }

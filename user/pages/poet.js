@@ -1,8 +1,8 @@
+import '../styles/components/author.css'
 import Head from 'next/head'
 import Header from '../components/Header'
 import { Row, Col, Tabs, Radio } from 'antd'
 import Footer from '../components/Footer'
-import '../styles/components/author.css'
 import AllPoets from '../components/AllPoets'
 
 const { TabPane } = Tabs;

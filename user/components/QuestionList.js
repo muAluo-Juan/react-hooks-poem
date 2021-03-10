@@ -1,7 +1,8 @@
+import '../styles/components/questionlist.css'
 import { List, Avatar, Button, Skeleton } from 'antd';
 import { useEffect, useState } from 'react';
 import reqwest from 'reqwest';
-import '../styles/components/questionlist.css'
+
 
 const count = 3;
 const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;

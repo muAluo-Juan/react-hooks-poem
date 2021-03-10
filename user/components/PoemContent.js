@@ -1,17 +1,15 @@
+import '../styles/components/poemcontent.css'
 import {useContext} from 'react'
 import { List, Icon, Button, message } from 'antd'
-import '../styles/components/poemcontent.css'
 import ClipboardJS from 'clipboard'
 import CommonContext from './CommonContext';
+import Router from 'next/router'
 
 const collect=(e)=>{
     //未登录先登录（未解决）
     console.log(e.currentTarget.attributes)
     if(e.currentTarget.dataset.collect == "false"){
         e.currentTarget.style.color = '#cd201f'
-        // e.currentTarget.attributes.theme = 'filled'
-        // e.currentTarget.setAttribute('color','#cd201f')
-        // e.currentTarget.setAttribute('theme','filled')
         e.currentTarget.dataset.collect = "true"
         message.success("已添加到收藏夹")
     }
@@ -47,10 +45,20 @@ function correct() {
 
 }
 
-const PoemContent = () => {
+export default function PoemContent (){
     let {poemList} = useContext(CommonContext)
     let {pagination} = useContext(CommonContext)
     let {display} = useContext(CommonContext)
+    function gotoPoemDetail(e){
+        let poem = []
+        for(let i = 0 ; i < poemList.length ; i ++)
+            if(poemList[i].id == e.target.dataset.id)
+            {
+                poem.push(poemList[i])
+                break
+            }   
+        Router.push("/poemdetail?id="+e.target.dataset.id)
+    }
     return (
         <List
             itemLayout="vertical"
@@ -61,7 +69,7 @@ const PoemContent = () => {
                 <List.Item
                     key={item.name}
                     actions={[
-                        <Button size="small" style={{display:display}}>全文赏析</Button>
+                        <Button size="small" style={{display:display}} data-id={item.id} onClick={gotoPoemDetail}>全文赏析</Button>
                     ]}
                 >
                     <div id={"poem-content-copy"+index}>
@@ -102,8 +110,16 @@ const PoemContent = () => {
                             />
                         </div>
                         <List.Item.Meta
-                            title={<h2 style={{color:"#cd201f"}}>{item.name}</h2>}
-                            description={item.authoruid + '[' + item.dynastyid + ']'}
+                            title={
+                                <h2 
+                                    style={{color:"#cd201f",cursor:'pointer'}}
+                                    data-id={item.id} 
+                                    onClick={gotoPoemDetail}
+                                >
+                                    {item.name}
+                                </h2>
+                            }
+                            description={item.author + ' [' + item.dynasty + '] '}
                         />
                         <div
                             dangerouslySetInnerHTML={{ __html: item.content.replace(/^(\s|\\n)+|(\s|\\n)+$/g, '').replace(/\\n/g, "<br>")}}
@@ -115,4 +131,3 @@ const PoemContent = () => {
         />
     )
 }
-export default PoemContent

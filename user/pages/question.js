@@ -1,11 +1,11 @@
+import '../styles/pages/comm.css'
+import '../styles/pages/question.css'
+import '../styles/components/author.css'
 import Head from 'next/head'
 import Header from '../components/Header'
 import { Row, Col, Divider, Avatar, Input, Button, Tabs } from 'antd'
 import Footer from '../components/Footer'
-import '../styles/components/author.css'
 import { useState } from 'react'
-import '../styles/pages/comm.css'
-import '../styles/pages/question.css'
 import LazyQuestionList from '../components/LazyQuestionList'
 
 export default function Question() {

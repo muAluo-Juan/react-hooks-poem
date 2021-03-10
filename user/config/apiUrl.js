@@ -8,7 +8,9 @@ let servicePath = {
     getDynastyList : ipUrl+'dynasties', //朝代列表接口
     getPoetList : ipUrl + 'poets',  //诗人列表接口
     getTypeList : ipUrl + 'types',  //类型列表接口
-    getPoemList : ipUrl + 'poems',  //诗歌列表接口
+    getPoems : ipUrl + 'poems',  //诗歌列表接口
+    getPoemById: ipUrl + 'poem/', //根据id获得诗歌
+    getPoetByUId: ipUrl + 'poet/', //根据uid获得诗人信息
 }
 
 export default servicePath

@@ -1,12 +1,8 @@
 /**导航栏组件 */
-import React, { useEffect, useState } from 'react';
 import '../styles/components/header.css'
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Menu, Icon, Button, Input } from 'antd' //使用Ant Design的24格栅格化布局
 import Router from 'next/router'
-import Link from 'next/link'
-import axios from 'axios'
-
-import servicePath from '../config/apiUrl'
 
 const Header = () => {
     //getInitialProps不能在子组件中使用
@@ -45,6 +41,10 @@ const Header = () => {
         let pathname = window.location.pathname.replace("/","")
         if(pathname == "")
             pathname = "index"
+        else if(pathname == "poemdetail")
+            pathname = "poem"
+        else if(pathname == "poetdetail")
+            pathname = "poet"
         setCurrent(pathname)
         console.log(pathname)
     })

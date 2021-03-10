@@ -1,10 +1,13 @@
+import '../styles/components/author.css'
+import '../styles/pages/comm.css'
 import Head from 'next/head'
 import Header from '../components/Header'
 import { Row, Col } from 'antd'
 import Footer from '../components/Footer'
-import '../styles/components/author.css'
 import AllPoems from '../components/AllPoems'
-import '../styles/pages/comm.css'
+import { useEffect, useState } from 'react'
+import CommonContext from '../components/CommonContext'
+
 
 export default function Poem() {
     return (

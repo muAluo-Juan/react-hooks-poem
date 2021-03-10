@@ -1,25 +1,59 @@
+import '../styles/components/author.css'
+import '../styles/pages/poemdetail.css'
+import '../styles/pages/comm.css'
 import PoemContent from "../components/PoemContent"
 import CommonContext from '../components/CommonContext'
 import Head from 'next/head'
 import Header from '../components/Header'
-import { Row, Col } from 'antd'
+import { Row, Col, Breadcrumb } from 'antd'
 import Footer from '../components/Footer'
-import '../styles/components/author.css'
-import '../styles/pages/poemdetail.css'
-import '../styles/pages/comm.css'
+import { useEffect, useState } from "react"
+import axios from 'axios'
+import servicePath from "../config/apiUrl"
+import PoetIntro from "../components/PoetIntro"
 
 const PoemDetail = () => {
-    let poemList = [
+
+    const [poemList, setPoemList] = useState([])
+    const [poets, setPoets] = useState([])
+
+    useEffect(() => {
+        getPoemById()
+    }, [])
+
+    useEffect(()=>{
+        console.log(poemList.length)
+        if(poemList.length > 0)
         {
-            href: '/poemdetail',
-            title: `静夜思1`,
-            description:
-                '李白 [唐代]',
-            content:
-                '\n离离原上草，一岁一枯荣。野火烧不尽，春风吹又生。远芳侵古道，晴翠接荒城。又送王孙去，萋萋满别情。\n'.replace(/。/g, "。<br>"),
-            isCollect: "false"
-        }
-    ]
+            getPoetByUId()
+            console.log("执行")
+        }    
+    },[poemList.length])
+
+    const getPoemById = () => {
+        axios({
+            method: 'GET',
+            url: servicePath.getPoemById + (window.location.search.split("="))[1],
+            withCredentials: true
+        }).then(
+            res => {
+                setPoemList([res.data.data])
+            }
+        )
+    }
+
+    const getPoetByUId = ()=>{
+        axios({
+            method: 'GET',
+            url: servicePath.getPoetByUId + poemList[0].authoruid,
+            withCredentials: true
+        }).then(
+            res =>{
+                setPoets([res.data.data])
+            }
+        )
+    }
+
     let pagination = null
     let display = 'none'
 
@@ -32,23 +66,47 @@ const PoemDetail = () => {
             <Row className="comm-main" type="flex" justify="center">
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={16} xl={16}>
                     <div className="poem-detail-div">
-                        <CommonContext.Provider value={{poemList,pagination,display}}>
+                        {
+                            poemList.map((item, index) => {
+                                return (
+                                    <Breadcrumb>
+                                        <Breadcrumb.Item>诗词</Breadcrumb.Item>
+                                        <Breadcrumb.Item>
+                                            <a href="/poem">诗词大全</a>
+                                        </Breadcrumb.Item>
+                                        <Breadcrumb.Item>{item.name}</Breadcrumb.Item>
+                                    </Breadcrumb>
+                                )
+                            })
+                        }
+                        <CommonContext.Provider value={{ poemList, pagination, display }}>
                             <PoemContent />
                         </CommonContext.Provider>
-                        <div>
-                            <h3 style={{fontWeight:"bold"}}>译文及注释</h3>
-                            <span style={{fontWeight:"bold"}}>译文</span>
-                            <div
-                                dangerouslySetInnerHTML={{ __html: poemList[0].content }}
-                                style={{ lineHeight: "2rem" }}>
-                            </div>
-                            <span style={{fontWeight:"bold"}}>注释</span>
-                            <div
-                                dangerouslySetInnerHTML={{ __html: poemList[0].content }}
-                                style={{ lineHeight: "2rem" }}>
-                            </div>
-                            <h3 style={{fontWeight:"bold"}}>鉴赏</h3>
-                        </div>
+                        {
+                            poemList.map((item, index) => {
+                                return (
+                                    <div>
+                                        <div>
+                                            <h3 style={{ fontWeight: "bold", color: "#cd201f" }}>注释</h3>
+                                            <div
+                                                dangerouslySetInnerHTML={{ __html: item.annotation.replace(/。/g, '。<br>') }}
+                                                style={{ lineHeight: "2rem", marginTop: "0.5rem", marginBottom: "0.5rem", color: "rgba(0,0,0,0.65)" }}
+                                            >
+                                            </div>
+                                            <h3 style={{ fontWeight: "bold", color: "#cd201f" }}>译文</h3>
+                                            <div
+                                                dangerouslySetInnerHTML={{ __html: item.translation.replace(/^(\s|\\n)+|(\s|\\n)+$/g, '').replace(/\\n/g, "<br>") }}
+                                                style={{ lineHeight: "2rem", marginTop: "0.5rem", marginBottom: "0.5rem", color: "rgba(0,0,0,0.65)" }}>
+                                            </div>
+                                            <h3 style={{ fontWeight: "bold", color: "#cd201f" }}>作者介绍</h3>
+                                            <CommonContext.Provider value={{poets,pagination}}>
+                                                <PoetIntro/>
+                                            </CommonContext.Provider>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </Col>
                 <Col className="comm-right" xs={0} sm={0} md={5} lg={5} xl={5}>

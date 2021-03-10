@@ -1,14 +1,13 @@
+import '../styles/pages/index.css'
+import '../styles/components/author.css'
 import Head from 'next/head'
 import Header from '../components/Header'
-import Link from 'next/link'
 import { Icon, Row, Col, Carousel, Divider, Button, Avatar } from 'antd'
 import { useState } from 'react'
-import axios from 'axios'
 import Footer from '../components/Footer'
 import PoetMatesIndex from '../components/PoetMatesIndex'
 import CommonContext from '../components/CommonContext'
-import '../styles/pages/index.css'
-import '../styles/components/author.css'
+
 
 import servicePath from '../config/apiUrl'
 
@@ -87,7 +86,7 @@ export default function Home(list) {
             </Col>
             <Col>
               <div>
-                <Divider orientation="left" plain>
+                <Divider orientation="left">
                   <h3>诗词专题</h3>
                 </Divider>
                 <div className="special-div">
@@ -98,7 +97,7 @@ export default function Home(list) {
                 </div>
                 <Button className="more-btn" size="small">全部专题</Button>
               </div>
-              <Divider orientation="left" plain>
+              <Divider orientation="left">
                   <h3>推荐诗词</h3>
                 </Divider>
                 <div className="recommend-poem-div">
@@ -116,7 +115,7 @@ export default function Home(list) {
                   <div>《烛影摇红·辜负天工》明代 · 夏侯淳</div>
                 </div>
               <div>
-                <Divider orientation="left" plain>
+                <Divider orientation="left">
                   <h3>诗友天地</h3>
                 </Divider>
                 <div className="poetmates-index">
@@ -137,7 +136,7 @@ export default function Home(list) {
             </div>
           </div>
           <div className="ad-div comm-box">
-            <Divider orientation="center" plain>
+            <Divider orientation="center">
               <h3>著名诗人</h3>
             </Divider>
             <div className="poet-div">
@@ -153,7 +152,7 @@ export default function Home(list) {
             </div>
           </div>
           <div className="ad-div comm-box">
-            <Divider orientation="center" plain>
+            <Divider orientation="center">
               <h3>活跃诗友</h3>
             </Divider>
             {

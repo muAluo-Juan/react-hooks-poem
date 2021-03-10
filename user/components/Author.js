@@ -1,6 +1,7 @@
+import '../styles/components/author.css'
 import React from 'react'
 import { Avatar, Divider, Badge } from 'antd'
-import '../styles/components/author.css'
+
 
 const Author = () => {
     return (

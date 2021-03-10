@@ -1,6 +1,7 @@
-import dynamic from 'next/dynamic'
-import { useState, useEffect } from 'react'
 import 'braft-editor/dist/index.css'
+import 'braft-editor/dist/index.css'
+import { useState, useEffect } from 'react'
+
 let BraftEditor = dynamic(() => import('braft-editor').then((module)=>{
     BraftEditor = module.default
     return module.default
