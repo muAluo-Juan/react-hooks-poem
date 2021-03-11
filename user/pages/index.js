@@ -5,7 +5,6 @@ import Header from '../components/Header'
 import { Icon, Row, Col, Carousel, Divider, Button, Avatar } from 'antd'
 import { useState } from 'react'
 import Footer from '../components/Footer'
-import PoetMatesIndex from '../components/PoetMatesIndex'
 import CommonContext from '../components/CommonContext'
 
 
@@ -16,6 +15,8 @@ import marked, { Renderer } from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
 import create from 'antd/lib/icon/IconFont'
+import WorkList from '../components/WorkList'
+import Router from 'next/router'
 
 export default function Home(list) {
   const [poet, setPoet] = useState(['李白', '杜甫', '猪八戒', '孙悟空', '唐僧', '沙悟净', '纳兰性德', '更多...'])
@@ -26,20 +27,9 @@ export default function Home(list) {
     { id: 4, userName: '元川居安4', score: 60, avatar: 'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg' },
     { id: 5, userName: '元川居安5', score: 50, avatar: 'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg' }
   ])
-  const listData = [];
-  for (let i = 0; i < 3; i++) {
-    listData.push({
-      href: 'http://ant.design',
-      title: `ant design part ${i}`,
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-      content:
-        'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    });
-  }
-  const pagination=null
-  const data = [pagination,listData]
+
+  let pagination=null
+  let chooseNav = "首页"
 
   // const [mylist, setMylist] = useState(list.data)
   // console.log(list.data)
@@ -56,6 +46,11 @@ export default function Home(list) {
   //     return hljs.highlightAuto(code).value
   //   }
   // })
+  function getMoreWork(){
+    // document.documentElement.scrollTop = document.body.scrollTop =0;  页面间跳转滚动到页面顶部暂未解决
+    Router.push('/community')
+  }
+
   return (
     <div>
       <Head>
@@ -119,11 +114,11 @@ export default function Home(list) {
                   <h3>诗友天地</h3>
                 </Divider>
                 <div className="poetmates-index">
-                  <CommonContext.Provider value={data}>
-                    <PoetMatesIndex/>
+                  <CommonContext.Provider value={{chooseNav,pagination}}>
+                    <WorkList/>
                   </CommonContext.Provider>
                 </div>
-                <Button className="all-btn" size="small">更多文章</Button>
+                <Button className="all-btn" size="small" onClick={getMoreWork}>更多文章</Button>
               </div>
             </Col>
           </Row>

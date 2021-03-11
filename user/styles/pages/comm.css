@@ -6,6 +6,7 @@ body{
   background-color: #f6f6f6;
   margin-top: 5em;
   color: black;
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .comm-left{

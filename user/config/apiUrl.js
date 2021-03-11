@@ -11,6 +11,8 @@ let servicePath = {
     getPoems : ipUrl + 'poems',  //诗歌列表接口
     getPoemById: ipUrl + 'poem/', //根据id获得诗歌
     getPoetByUId: ipUrl + 'poet/', //根据uid获得诗人信息
+    getNewWorkList: ipUrl + 'works/new', //获得最新作品列表
+    getHotWorkList: ipUrl + 'works/hot', //获得最热作品列表
 }
 
 export default servicePath
