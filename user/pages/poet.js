@@ -7,7 +7,7 @@ import AllPoets from '../components/AllPoets'
 
 const { TabPane } = Tabs;
 
-export default function Poem() {
+export default function Poet() {
     return (
         <div>
             <Head>

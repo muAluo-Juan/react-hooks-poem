@@ -1,0 +1,37 @@
+.community-comm-left{
+    background-color: #f6f6f6;
+    padding-left: 2.5rem;
+    padding-top: 6rem;
+}
+.community-left-list{
+    position: fixed;
+    text-align: center;
+}
+.community-left-list p{
+    margin-top: 0.3rem;
+    margin-bottom: 1.5rem;
+}
+.left-communitydetail{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+}
+.avatar-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.avatar-left-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.avatar-left-left-div{
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.work-center-content-div{
+    margin-top: 2rem;
+}

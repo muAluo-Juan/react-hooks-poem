@@ -1,30 +1,15 @@
 import { List, message, Avatar, Spin } from 'antd';
-
-import reqwest from 'reqwest';
-
 import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller';
 import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
 import VList from 'react-virtualized/dist/commonjs/List';
 import InfiniteLoader from 'react-virtualized/dist/commonjs/InfiniteLoader';
-
 import '../styles/components/lazyquestionlist.css'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import CommonContext from './CommonContext';
+import Router from 'next/router'
 
-const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
-const allData = []
-    for(let i = 0 ; i < 50; i ++){
-        allData.push({
-            name:"原川",
-            questionTime:"5分钟前",
-            question:"当前项目中打印pdf需要显示富文本内容，富文本内容 包含图片，图片转为base64直接存到数据库中，但是取出数据在pdf显示时，图片无法显示，有朋友解决过这个问题吗",
-            title:"PDF中如何显示base64图片",
-            likeNum:50,
-            collectNum:20,
-            answerNum:100
-        })
-    }
 const LazyQuestionList = () => {
-    
+    const allData = useContext(CommonContext)
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const temp = 0
@@ -33,23 +18,12 @@ const LazyQuestionList = () => {
 
     useEffect(() => {
         setData(allData)
-        // fetchData(res => {
-        //     setData(res.results)
-        // });
-        // console.log("本useEffect获得的数据",data.length)
-    },[temp])
+    })
 
-    // const fetchData = callback => {
-    //     reqwest({
-    //         url: fakeDataUrl,
-    //         type: 'json',
-    //         method: 'get',
-    //         contentType: 'application/json',
-    //         success: res => {
-    //             callback(res);
-    //         },
-    //     });
-    // };
+    const gotoQuestionDetail = (e)=>{
+        // Router.push('/questiondetail?id='+e.target.dataset.id)
+        window.open('/questiondetail?id='+e.target.dataset.id,'_blank')
+    }
 
     const handleInfiniteOnLoad = ({ startIndex, stopIndex }) => {
         let newData = data
@@ -58,7 +32,7 @@ const LazyQuestionList = () => {
             // 1 means loading
             loadedRowsMap[i] = 1;
         }
-        if (newData.length > 49) {
+        if (newData.length > 5) {
             message.warning('全部加载完毕！');
             setLoading(false)
             return;
@@ -66,37 +40,30 @@ const LazyQuestionList = () => {
         newData = newData.concat(allData);
         setData(newData)
         setLoading(false)
-        // fetchData(res => {
-        //     newData = newData.concat(res.results);
-        //     setData(newData)
-            // console.log("本更新后获得的数据",data.length)
-        //     setLoading(false)
-        // });
     };
 
     const isRowLoaded = ({ index }) => !!loadedRowsMap[index];
 
     const renderItem = ({ index, key, style }) => {
-        // const { data } = this.state;
         const item = data[index];
         return (
             <List.Item key={key} style={style}>
                 <div className="question-list-left">
                     <div><span>{item.likeNum}</span><span className="des">点赞</span></div>
-                    <div><span>{item.collectNum}</span><span className="des">关注</span></div>
+                    <div><span>{item.attentionNum}</span><span className="des">关注</span></div>
                     <div><span>{item.answerNum}</span><span className="des">回答</span></div>
                 </div>
                 <List.Item.Meta
                     title={
                         <div className="question-content">
-                            <h3 style={{cursor:"pointer",fontWeight:"bold"}}>{item.title}</h3>
-                            <div className="question-content-content">{item.question}</div>
+                            <h3 style={{cursor:"pointer",fontWeight:"bold"}} data-id={item.questionId} onClick={gotoQuestionDetail}>{item.text}</h3>
+                            <div className="question-content-content">{item.description}</div>
                         </div>
                     }
                     description={
-                        <div style={{float:"right",fontSize:"0.7rem"}}>
-                            <span>{item.name}</span>
-                            <span style={{marginLeft:"1rem"}}>{item.questionTime}</span>
+                        <div style={{float:"right",fontSize:"0.8rem"}}>
+                            <span>{item.penName}</span>
+                            <span style={{marginLeft:"1rem"}}>{(new Date(item.inputTime)).toLocaleString()}</span>
                         </div>
                     }
                 />
@@ -112,7 +79,7 @@ const LazyQuestionList = () => {
             onScroll={onChildScroll}
             overscanRowCount={2}
             rowCount={data.length}
-            rowHeight={110}
+            rowHeight={100}
             rowRenderer={renderItem}
             onRowsRendered={onRowsRendered}
             scrollTop={scrollTop}

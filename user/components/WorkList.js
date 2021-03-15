@@ -63,6 +63,10 @@ function WorkList() {
     )
   }
 
+  function gotoCommunityDetail(e){
+    window.open('/communitydetail?workid='+e.target.dataset.workid,'_blank')
+  }
+
   return (
     <List
       itemLayout="vertical"
@@ -73,8 +77,8 @@ function WorkList() {
         <List.Item
           key={item.title}
           actions={[
-            <IconText type="star-o" text={item.collectNum} key="list-vertical-star-o" />,
             <IconText type="like-o" text={item.likeNum} key="list-vertical-like-o" />,
+            <IconText type="star-o" text={item.collectNum} key="list-vertical-star-o" />,
             <IconText type="message" text={item.commentNum} key="list-vertical-message" />,
           ]}
           // extra={
@@ -93,9 +97,9 @@ function WorkList() {
                 <Button size="small" style={{marginLeft:"0.5rem"}}>关注</Button>
               </div>
             }
-            description={item.personalizedSig}
+            description={(new Date(item.inputTime)).toLocaleString()}
           />
-            <h3 style={{fontWeight:"bold",cursor:"pointer"}}>{item.title}</h3>
+            <h3 data-workid={item.workId} style={{fontWeight:"bold",cursor:"pointer"}} onClick={gotoCommunityDetail}>{item.title}</h3>
             <div className="work-content-div" dangerouslySetInnerHTML={{__html: item.text.replace(/(<([^>]+)>)/ig,"").replace(/[\r\n]/g,"")}}></div>
         </List.Item>
       )}

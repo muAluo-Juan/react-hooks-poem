@@ -3,15 +3,15 @@ import '../styles/pages/question.css'
 import '../styles/components/author.css'
 import Head from 'next/head'
 import Header from '../components/Header'
-import { Row, Col, Divider, Avatar, Input, Button, Tabs, Radio } from 'antd'
+import { Row, Col, Divider, Avatar, Button } from 'antd'
 import Footer from '../components/Footer'
 import { useEffect, useState } from 'react'
-import LazyQuestionList from '../components/LazyQuestionList'
 import axios from 'axios'
 import servicePath from "../config/apiUrl"
 import CommonContext from '../components/CommonContext'
+import AnswerList from '../components/AnswerList'
 
-export default function Question() {
+export default function QuestionDetail() {
     const [answerMates, setAnswerMates] = useState([
         { id: 1, userName: '元川居安1', adopted: 20, avatar: 'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg' },
         { id: 2, userName: '笑死我了好', adopted: 75, avatar: 'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg' },
@@ -19,51 +19,21 @@ export default function Question() {
         { id: 4, userName: '元川居安4', adopted: 60, avatar: 'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg' },
         { id: 5, userName: '元川居安5', adopted: 50, avatar: 'https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/yeyv1.jpg' }
     ])
-    const { Search } = Input
-    const [choose,setChoose] = useState("a")
-    const [questionList,setQuestionList] = useState([])
-    useEffect(()=>{
-        if(choose == "a"){
-            getHotQuestions()
-        }else if(choose == "b"){
-            getNosolvedQuestions()
-        }else if(choose == "c"){
-            getSolvedQuestions()
-        }
-    },[choose])
+    const [question, setQuestion] = useState({})
 
-    const getHotQuestions = ()=>{
+    useEffect(() => {
+        getQuestionById()
+    },[])
+
+    const getQuestionById = () => {
         axios({
-            method: 'GET',
-            url: servicePath.getHotQuestionList,
+            method: "GET",
+            url: servicePath.getQuestionById + (window.location.search.split('='))[1],
             withCredentials: true
         }).then(
-            res=>{
-                setQuestionList(res.data.data)
-            }
-        )
-    }
-
-    const getNosolvedQuestions = ()=>{
-        axios({
-            method: 'GET',
-            url: servicePath.getNoSolvedQuestionList,
-            withCredentials: true
-        }).then(
-            res=>{
-                setQuestionList(res.data.data)
-            }
-        )
-    }
-
-    const getSolvedQuestions = ()=>{
-        axios({
-            method: 'GET',
-            url: servicePath.getSolvedQuestionList,
-            withCredentials: true
-        }).then(
-            res=>{
-                setQuestionList(res.data.data.slice(0,10))
+            res => {
+                setQuestion(res.data.data)
+                console.log(res.data.data)
             }
         )
     }
@@ -77,22 +47,26 @@ export default function Question() {
             <Row className="comm-main" type="flex" justify="center">
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={16} xl={16}>
                     <div className="common-left-content-div">
-                        <div className="search-add-question">
-                            <Search className="input-question" placeholder="输入搜索内容" onSearch={value => console.log(value)} enterButton />
-                            <Button className="add-question" type="primary">提问</Button>
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                            <Avatar src={question.headPicPath} />
+                            <span style={{ marginLeft: "0.8rem" }}>{question.penName}</span>
+                            <span style={{ marginLeft: "0.8rem" }}>{(new Date(question.inputTime)).toLocaleString()}</span>
                         </div>
-                        <div style={{ marginTop: "1.5rem",marginBottom:"1rem" }}>
-                            <Radio.Group defaultValue={choose} buttonStyle="solid">
-                                <Radio.Button value="a" onClick={()=>{setChoose("a")}}>人气问题</Radio.Button>
-                                <Radio.Button value="b" onClick={()=>{setChoose("b")}}>未解决</Radio.Button>
-                                <Radio.Button value="c" onClick={()=>{setChoose("c")}}>已解决</Radio.Button>
-                            </Radio.Group>
+                        <div style={{ marginTop: "1.5rem" }}>
+                            <h2 style={{ fontWeight: "bold" }}>{question.text}</h2>
+                            <div style={{lineHeight:"1.7rem"}}>{question.description}</div>
                         </div>
-                        <Divider/>
-                        <CommonContext.Provider value={questionList}>
-                            <LazyQuestionList />
-                        </CommonContext.Provider>
-                        <Divider/>
+                        <div style={{ marginTop: "1.5rem", display: "flex", flexDirection: "row" }}>
+                            <Button>点赞 {question.likeNum}</Button>
+                            <Button style={{marginLeft:"0.8rem"}}>关注 {question.attentionNum}</Button>
+                            <Button type="primary" style={{marginLeft:"0.8rem"}}>写回答</Button>
+                        </div>
+                        <div style={{ marginTop: "1.5rem" }}>
+                            <h3>回答</h3>
+                            <CommonContext.Provider value={question.answers}>
+                                <AnswerList/>
+                            </CommonContext.Provider>
+                        </div>
                     </div>
                 </Col>
                 <Col className="comm-right" xs={0} sm={0} md={5} lg={5} xl={5}>

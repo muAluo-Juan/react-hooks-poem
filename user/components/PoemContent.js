@@ -9,7 +9,7 @@ const collect=(e)=>{
     //未登录先登录（未解决）
     console.log(e.currentTarget.attributes)
     if(e.currentTarget.dataset.collect == "false"){
-        e.currentTarget.style.color = '#cd201f'
+        e.currentTarget.style.color = '#FFA500'
         e.currentTarget.dataset.collect = "true"
         message.success("已添加到收藏夹")
     }
@@ -78,7 +78,7 @@ export default function PoemContent (){
                             <Icon
                                 className="icon"
                                 style={{ marginRight: "1.2rem" }}
-                                // data-collect={item.isCollect}
+                                data-collect="false"
                                 type="star"
                                 title="收藏"
                                 onClick={collect}

@@ -14,7 +14,6 @@ const QuestionList = () => {
     const [list, setList] = useState([])
     const a = 10
     useEffect(()=>{
-        console.log("老子执行了几次")
         getData(res => {
             setInitLoading(false)
             setData(res.results)

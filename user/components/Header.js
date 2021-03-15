@@ -45,6 +45,10 @@ const Header = () => {
             pathname = "poem"
         else if(pathname == "poetdetail")
             pathname = "poet"
+        else if(pathname == "communitydetail")
+            pathname = "community"
+        else if(pathname == "questiondetail")
+            pathname = "question"
         setCurrent(pathname)
         console.log(pathname)
     })
