@@ -41,7 +41,7 @@ export default function QuestionDetail() {
     return (
         <div>
             <Head>
-                <title>夜雨时问答专区</title>
+                <title>夜雨时问答详情</title>
             </Head>
             <Header />
             <Row className="comm-main" type="flex" justify="center">
@@ -62,8 +62,8 @@ export default function QuestionDetail() {
                             <Button type="primary" style={{marginLeft:"0.8rem"}}>写回答</Button>
                         </div>
                         <div style={{ marginTop: "1.5rem" }}>
-                            <h3>回答</h3>
-                            <CommonContext.Provider value={question.answers}>
+                            {/* <h3>回答</h3> */}
+                            <CommonContext.Provider value={[question.answers,question.isSolved]}>
                                 <AnswerList/>
                             </CommonContext.Provider>
                         </div>

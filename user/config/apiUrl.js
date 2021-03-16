@@ -19,6 +19,7 @@ let servicePath = {
     getNoSolvedQuestionList : ipUrl + 'questions/nosolved', //获得人气问题列表
     getSolvedQuestionList : ipUrl + 'questions/solved', //获得人气问题列表
     getQuestionById : ipUrl + 'question/', //根据问题id获取问题
+    checkLogin: ipUrl + 'login', //登录
 }
 
 export default servicePath

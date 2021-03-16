@@ -21,28 +21,19 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 )
 
 const AnswerList = () => {
-    const answers = useContext(CommonContext)
+    const data = useContext(CommonContext)
+    const [isSolved,setIsSolved] = useState(0)
     const [answerData, setAnswerData] = useState([])
-    console.log(answers)
     const [submitting, setSubmitting] = useState(false)
     const [value, setValue] = useState('')
     
     useEffect(()=>{
-        if(answers != undefined)
-            setAnswerData(answers)
-    },[answers])
-
-    // const getCommentsData = () => {
-    //     axios({
-    //         method: 'GET',
-    //         url: servicePath.getCommentListByWorkId + workId,
-    //         withCredentials: true
-    //     }).then(
-    //         res => {
-    //             setCommentsData(res.data.data)
-    //         }
-    //     )
-    // }
+        if(data != undefined && data[0] != undefined && data[1] != undefined)
+        {
+            setAnswerData(data[0])
+            setIsSolved(data[1])
+        }    
+    },[data])
 
     const handleChange = e => {
         setValue(e.target.value)
@@ -78,6 +69,7 @@ const AnswerList = () => {
                 dataSource={answerData}
                 renderItem={item => (
                     <li>
+                        <img style={{display: item.answerId == isSolved ? "block" : "none",float:'right',marginTop:"0.5rem"}} width={70} height={45} src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/adopted.png"/>
                         <Comment
                             //   actions={item.actions}
                             author={item.penName}

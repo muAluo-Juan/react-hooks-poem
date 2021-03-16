@@ -3,6 +3,7 @@ import '../styles/components/header.css'
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Menu, Icon, Button, Input } from 'antd' //使用Ant Design的24格栅格化布局
 import Router from 'next/router'
+import Login from './Login';
 
 const Header = () => {
     //getInitialProps不能在子组件中使用
@@ -87,13 +88,15 @@ const Header = () => {
                     </Menu>
                 </Col>
                 <Col xs={0} sm={0} md={14} lg={10} xl={8}>
+                    <div style={{float:"right",display:"flex",flexDirection:"row",alignItems:"center"}}>
                     <Search
                         placeholder="搜索诗词"
                         onSearch={value => console.log(value)}
                         className="search"
                     />
-                    <Button type="primary">登录</Button>
+                    <Login/>
                     <Button type="danger" className="btn-user">注册</Button>
+                    </div>
                 </Col>
             </Row>
         </div>
