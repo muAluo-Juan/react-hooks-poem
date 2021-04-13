@@ -1,7 +1,8 @@
 /**导航栏组件 */
 import '../styles/components/header.css'
+import cookie from 'react-cookies'
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Menu, Icon, Button, Input } from 'antd' //使用Ant Design的24格栅格化布局
+import { Row, Col, Menu, Icon, Button, Input, Avatar } from 'antd' //使用Ant Design的24格栅格化布局
 import Router from 'next/router'
 import Login from './Login';
 
@@ -9,29 +10,10 @@ const Header = () => {
     //getInitialProps不能在子组件中使用
     const { Search } = Input //搜索框
     const { SubMenu } = Menu;
-
-    //待解决
-    // const [nowNav,setNowNav] = useState('0')
-    // useEffect(()=>{
-    //     setNowNav('2')
-    // },[])
-    // useEffect(()=>{
-    //     // const fetchData = async()=>{
-    //     //     const result = await axios(servicePath.getTypeInfo)
-    //     //                 .then((res)=>{
-    //     //                     return res.data.data
-    //     //                 })
-    //     //     setNavArray(result)
-    //     // }
-    //     // fetchData() //让它执行
-    //     setNavArray('诗词鉴赏')
-    // },[])
+    const [registerDisplay, setRegisterDisplay] = useState("block")
     const [current,setCurrent] = useState('index')
 
     const handlerClickNav = (e) => {
-        // console.log("之前的"+current)
-        // setCurrent(e.key)//导航跳来跳去，未解决
-        // console.log("现在的"+current)
         if(e.key == 'index')
             Router.push('/')
         else
@@ -53,7 +35,7 @@ const Header = () => {
         setCurrent(pathname)
         console.log(pathname)
     })
-  
+
     return (
         <div className="header">
             <Row type="flex" justify="center">
@@ -89,13 +71,14 @@ const Header = () => {
                 </Col>
                 <Col xs={0} sm={0} md={14} lg={10} xl={8}>
                     <div style={{float:"right",display:"flex",flexDirection:"row",alignItems:"center"}}>
-                    <Search
-                        placeholder="搜索诗词"
-                        onSearch={value => console.log(value)}
-                        className="search"
-                    />
-                    <Login/>
-                    <Button type="danger" className="btn-user">注册</Button>
+                        <Search
+                            placeholder="搜索诗词"
+                            onSearch={value => console.log(value)}
+                            className="search"
+                        />
+                        <Login setRegisterDisplay={setRegisterDisplay}/>
+                        <Button type="danger" className="btn-user" style={{display:registerDisplay}}>注册</Button>
+                        {/* <Avatar/> */}
                     </div>
                 </Col>
             </Row>
