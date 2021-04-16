@@ -8,17 +8,23 @@ import PoemContent from '../components/PoemContent'
 import { Divider } from 'antd'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
+import cookie from 'react-cookies'
 
-const AllPoems = () => {
+const AllPoems = (props) => {
     const [poems, setPoems] = useState([])
     const [poemList, setPoemList] = useState([])
     const [dynasty, setDynasty] = useState(0)
     const [poet, setPoet] = useState(0)
     const [type, setType] = useState(0)
+    const [collectState, setCollectState] = useState(0)
+    const cookieState = useContext(CommonContext)
     useEffect(() => {
+        console.log("collecState",collectState)
+        console.log("cookieState",cookieState)
+        setCollectState(0)
         getPoems()
-        console.log("useEffect")
-    }, [])
+        // console.log("重新请求一次列表")
+    },[collectState,cookieState])
 
     useEffect(() => {
         if (poems.length != 0) {
@@ -33,7 +39,7 @@ const AllPoems = () => {
     const getPoems = () => {
         axios({
             method: 'get',
-            url: servicePath.getPoems,
+            url: servicePath.getPoems + cookie.load("user"),
             withCredentials: true
         }).then(
             res => {
@@ -58,7 +64,7 @@ const AllPoems = () => {
             <TypeSelectList setType={setType} />
             <Divider></Divider>
             <CommonContext.Provider value={{ poemList, pagination, display }}>
-                <PoemContent />
+                <PoemContent setCollectState={setCollectState}/>
             </CommonContext.Provider>
         </div>
     )

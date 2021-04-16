@@ -1,16 +1,17 @@
 /**导航栏组件 */
 import '../styles/components/header.css'
-import cookie from 'react-cookies'
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Menu, Icon, Button, Input, Avatar } from 'antd' //使用Ant Design的24格栅格化布局
 import Router from 'next/router'
 import Login from './Login';
+import Register from './Register';
 
-const Header = () => {
+const Header = (props) => {
     //getInitialProps不能在子组件中使用
     const { Search } = Input //搜索框
     const { SubMenu } = Menu;
     const [registerDisplay, setRegisterDisplay] = useState("block")
+    const {setCookieState} = props
     const [current,setCurrent] = useState('index')
 
     const handlerClickNav = (e) => {
@@ -71,14 +72,13 @@ const Header = () => {
                 </Col>
                 <Col xs={0} sm={0} md={14} lg={10} xl={8}>
                     <div style={{float:"right",display:"flex",flexDirection:"row",alignItems:"center"}}>
+                        <Login setRegisterDisplay={setRegisterDisplay} setCookieState={setCookieState}/>
+                        <Register registerDisplay={registerDisplay}/>
                         <Search
                             placeholder="搜索诗词"
                             onSearch={value => console.log(value)}
                             className="search"
                         />
-                        <Login setRegisterDisplay={setRegisterDisplay}/>
-                        <Button type="danger" className="btn-user" style={{display:registerDisplay}}>注册</Button>
-                        {/* <Avatar/> */}
                     </div>
                 </Col>
             </Row>

@@ -25,7 +25,7 @@ function WorkList() {
     }else if(chooseNav == "首页"){
       getIndexWork()
     }
-  },[chooseNav])
+  })
 
   const getNewWork = ()=>{
     axios({
@@ -81,13 +81,6 @@ function WorkList() {
             <IconText type="star-o" text={item.collectNum} key="list-vertical-star-o" />,
             <IconText type="message" text={item.commentNum} key="list-vertical-message" />,
           ]}
-          // extra={
-          //   <img
-          //     width={272}
-          //     alt="logo"
-          //     src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-          //   />
-          // }
         >
           <List.Item.Meta
             avatar={<Avatar src={item.headPicPath} size={40}/>}
@@ -97,7 +90,7 @@ function WorkList() {
                 <Button size="small" style={{marginLeft:"0.5rem"}}>关注</Button>
               </div>
             }
-            description={(new Date(item.inputTime)).toLocaleString()}
+            description={(new Date(item.modifyTime)).toLocaleString()}
           />
             <h3 data-workid={item.workId} style={{fontWeight:"bold",cursor:"pointer"}} onClick={gotoCommunityDetail}>{item.title}</h3>
             <div className="work-content-div" dangerouslySetInnerHTML={{__html: item.text.replace(/(<([^>]+)>)/ig,"").replace(/[\r\n]/g,"")}}></div>

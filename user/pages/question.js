@@ -97,7 +97,7 @@ export default function Question() {
                 </Col>
                 <Col className="comm-right" xs={0} sm={0} md={5} lg={5} xl={5}>
                     <div className="comm-box author-div">
-                        前往<a style={{ padding: '0.3rem', textDecoration: 'none', color: '#cd201f' }}>登录</a>查看更多我的问答信息
+                        前往<span style={{ paddingLeft: '0.3rem', paddingRight: '0.3rem', color: '#cd201f' }}>登录</span>查看更多我的问答信息
                     </div>
                     <div className="comm-box rank-div">
                         <div style={{ float: "left" }}>问答榜</div>

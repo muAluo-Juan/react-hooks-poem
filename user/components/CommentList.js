@@ -1,20 +1,11 @@
-import { Comment, Avatar, Form, Button, List, Input } from 'antd'
+import { Comment, Avatar, Form, Button, List, Input, message } from 'antd'
 import axios from 'axios'
-import moment from 'moment'
 import { useContext, useEffect, useState } from 'react'
 import CommonContext from './CommonContext'
 import servicePath from '../config/apiUrl'
+import cookie from 'react-cookies'
 
 const { TextArea } = Input
-
-// const Comments = ({ comments }) => (
-//     <List
-//         dataSource={comments}
-//         header={`${comments.length} ${'条评论'}`}
-//         itemLayout="horizontal"
-//         renderItem={props => <Comment {...props} />}
-//     />
-// )
 
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
     <div>
@@ -29,16 +20,18 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
     </div>
 )
 
-const CommentList = () => {
+const CommentList = (props) => {
     const workId = useContext(CommonContext)
     const [commentsData, setCommentsData] = useState([])
     const [submitting, setSubmitting] = useState(false)
     const [value, setValue] = useState('')
+    const [commentChange, setCommentChange] = useState(0)
+    const {setComment} = props
 
     useEffect(() => {
-        if(workId != undefined)
+        if (workId != undefined)
             getCommentsData()
-    },[workId])
+    }, [workId, commentChange])
 
     const getCommentsData = () => {
         axios({
@@ -57,24 +50,41 @@ const CommentList = () => {
     }
 
     const handleSubmit = () => {
-        if (!value)
-            return;
-        setSubmitting(true)
-        setTimeout(() => {
-            setSubmitting(false)
-            setValue('')
-            setCommentsData(
-                [
-                    {
-                        author: 'Han Solo',
-                        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-                        content: <p>{value}</p>,
-                        datetime: moment().fromNow(),
-                    },
-                    ...commentsData
-                ]
-            )
-        }, 1000)
+        if (cookie.load('user') == undefined)
+            message.warn("请先登录！")
+        else {
+            if (!value){
+                message.warn("评论内容不能为空！")
+                return;
+            }
+            setSubmitting(true)
+            setTimeout(() => {
+                let dataProps = {
+                    commentText: value,
+                    workId: workId
+                }
+                axios({
+                    method: "POST",
+                    url: servicePath.addComment,
+                    withCredentials: true,
+                    headers: { 'token': cookie.load('token')},
+                    data: dataProps
+                }).then(
+                    res=>{
+                        if(res.data.code == 200){
+                            setSubmitting(false)
+                            setValue('')
+                            setCommentChange(commentChange==0)
+                            setComment(1)
+                        }
+                        else{
+                            message.error("出现未知错误")
+                        }
+                    }
+                )
+            }, 1000)
+        }
+
     }
 
     return (
