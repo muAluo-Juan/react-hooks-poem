@@ -14,6 +14,7 @@ import PoemContent from "../components/PoemContent"
 
 const PoetDetail = () => {
     const [poets, setPoets] = useState([])
+    const [cookieState, setCookieState] = useState(false)
     const pagination = null
     const pagination2 = {
         onChange: page => {
@@ -42,7 +43,7 @@ const PoetDetail = () => {
             <Head>
                 <title>夜雨时诗人详情</title>
             </Head>
-            <Header />
+            <Header setCookieState={setCookieState}/>
             <Row className="comm-main" type="flex" justify="center">
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={16} xl={16}>
                     <div className="poet-detail-div">

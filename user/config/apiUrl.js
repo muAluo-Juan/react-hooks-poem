@@ -26,6 +26,13 @@ let servicePath = {
     collectWork: ipUrl + 'collection/work/', //收藏作品
     attendUser: ipUrl + 'attention/user/', //关注用户
     addComment: ipUrl + 'comment/work', //发表评论
+    likeQuestion: ipUrl + 'like/question/', //点赞问题
+    attendQuestion: ipUrl + 'attention/question/', //关注问题
+    answerQuestion: ipUrl + 'answer', //回答问题
+    likeAnswer: ipUrl + 'like/answer/', //赞同回答
+    addQuestion: ipUrl + 'questions/addition', //提问
+    adoptAnswer: ipUrl + 'questions/modification', //采纳回答
+    searchQuestion: ipUrl + 'questions/search/', //搜索问题
 }
 
 export default servicePath

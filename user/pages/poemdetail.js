@@ -16,6 +16,7 @@ const PoemDetail = () => {
 
     const [poemList, setPoemList] = useState([])
     const [poets, setPoets] = useState([])
+    const [cookieState, setCookieState] = useState(false)
 
     useEffect(() => {
         getPoemById()
@@ -62,7 +63,7 @@ const PoemDetail = () => {
             <Head>
                 <title>夜雨时古诗词详情</title>
             </Head>
-            <Header />
+            <Header setCookieState={setCookieState}/>
             <Row className="comm-main" type="flex" justify="center">
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={16} xl={16}>
                     <div className="poem-detail-div">

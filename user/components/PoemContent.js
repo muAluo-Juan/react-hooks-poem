@@ -117,11 +117,12 @@ export default function PoemContent(props) {
                             />
                         </div>
                         <List.Item.Meta
+                            onClick={gotoPoemDetail}
                             title={
                                 <h2
                                     style={{ color: "#cd201f", cursor: 'pointer' }}
                                     data-id={item.id}
-                                    onClick={gotoPoemDetail}
+                                    
                                 >
                                     {item.name}
                                 </h2>

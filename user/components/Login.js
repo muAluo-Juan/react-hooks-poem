@@ -3,6 +3,7 @@ import { Button, Modal, Input, Icon, message, Avatar, Menu, Dropdown } from 'ant
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
+import Router from 'next/router'
 const { Search } = Input
 
 const Login = (props) => {
@@ -38,6 +39,12 @@ const Login = (props) => {
             setAvatarDisplay("block")
             setHeadPicPath(cookie.load("headpicpath"))
             setPenName(cookie.load("penname"))
+            setCookieState(true)
+        }else{
+            setLoginDisplay("block")
+            setRegisterDisplay("block")
+            setAvatarDisplay("none")
+            setCookieState(false)
         }
     })
 
@@ -110,8 +117,13 @@ const Login = (props) => {
     )
 
     function handleMenuClick(e) {
-        message.success('登出成功');
-        if (e.key == 3) {
+        if(e.key == 1){
+            message.success("去写作页面")
+        }else if(e.key == 2){
+            Router.push("/my")
+        }
+        else if(e.key == 3) {
+            message.success('登出成功');
             cookie.remove("user")
             cookie.remove("token")
             cookie.remove("penname")
@@ -120,6 +132,8 @@ const Login = (props) => {
             setLoginDisplay("block")
             setRegisterDisplay("block")
             setAvatarDisplay("none")
+        }else{
+            message.error("出现未知错误！")
         }
     }
 

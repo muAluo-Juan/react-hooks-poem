@@ -30,6 +30,7 @@ export default function Home(list) {
 
   let pagination=null
   let chooseNav = "首页"
+  const [cookieState, setCookieState] = useState(false)
 
   // const [mylist, setMylist] = useState(list.data)
   // console.log(list.data)
@@ -56,7 +57,7 @@ export default function Home(list) {
       <Head>
         <title>夜雨时首页</title>
       </Head>
-      <Header />
+      <Header setCookieState={setCookieState}/>
       <Row className="comm-main" type="flex" justify="center">
         <Col className="comm-left" xs={24} sm={24} md={16} lg={16} xl={16}>
           <Row type="flex" justify="center">

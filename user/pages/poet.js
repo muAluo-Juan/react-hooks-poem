@@ -4,16 +4,18 @@ import Header from '../components/Header'
 import { Row, Col, Tabs, Radio } from 'antd'
 import Footer from '../components/Footer'
 import AllPoets from '../components/AllPoets'
+import {useState} from 'react'
 
 const { TabPane } = Tabs;
 
 export default function Poet() {
+    const [cookieState, setCookieState] = useState(false)
     return (
         <div>
             <Head>
                 <title>夜雨时诗人一览</title>
             </Head>
-            <Header />
+            <Header setCookieState={setCookieState}/>
             <Row className="comm-main" type="flex" justify="center">
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={16} xl={16}>
                     <AllPoets/>

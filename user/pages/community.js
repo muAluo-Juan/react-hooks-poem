@@ -27,11 +27,10 @@ export default function Community() {
         {
             setCookieState(true)
             setUserName(cookie.load("user"))
-            console.log("community传过去的",userName)
         }    
         else
             setCookieState(false)
-    },[])
+    },[cookieState])
     function createWork() {
         Router.push('/creatework')
     }

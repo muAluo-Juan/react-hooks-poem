@@ -18,7 +18,7 @@ export default function CommunityDetail() {
     const [like, setLike] = useState(0)
     const [collect, setCollect] = useState(0)
     const [attend, setAttend] = useState(0)
-    const [cookieState, setCookieState] = useState('false')
+    const [cookieState, setCookieState] = useState(false)
     const [comment, setComment] = useState(0)
 
     useEffect(() => {

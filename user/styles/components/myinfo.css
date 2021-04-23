@@ -1,0 +1,29 @@
+.myinfo-avatar-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    margin-left: 2.3rem;
+    /* text-align: center; */
+}
+
+/* .myinfo-avatar-div-tag{
+    position: relative;
+    left: -2rem;
+    top: 2.5rem;
+} */
+
+.myinfo-avatar-div-name{
+    /* text-align: center; */
+    align-items: center;
+    margin-left: 2rem;
+    /* margin-top: 0.5rem; */
+}
+
+.myinfo-input{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    margin-left: 3.5rem;
+}
