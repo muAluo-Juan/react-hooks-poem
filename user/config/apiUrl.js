@@ -33,6 +33,9 @@ let servicePath = {
     addQuestion: ipUrl + 'questions/addition', //提问
     adoptAnswer: ipUrl + 'questions/modification', //采纳回答
     searchQuestion: ipUrl + 'questions/search/', //搜索问题
+    getUserWorkList: ipUrl + 'user/works/', //获取某用户的作品列表
+    getUserCollectionList: ipUrl + 'user/collections/', //获取用户的收藏列表
+    getUserAttentionList: ipUrl + 'user/attentions/', //获取用户的关注列表
 }
 
 export default servicePath
