@@ -61,7 +61,7 @@ export default function Home(list) {
       <Row className="comm-main" type="flex" justify="center">
         <Col className="comm-left" xs={24} sm={24} md={16} lg={16} xl={16}>
           <Row type="flex" justify="center">
-            <Col xs={18} sm={18} md={12} lg={12} xl={18}>
+            {/* <Col xs={18} sm={18} md={12} lg={12} xl={18}>
               <Carousel autoplay>
                 <div>
                   <h3><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c1.jpg" alt="c1" /></h3>
@@ -79,7 +79,7 @@ export default function Home(list) {
               <div className="ad"><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c4.jpg" width="100%" /></div>
               <div className="ad" style={{ marginTop: "0.8rem" }}><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c5.jpg" width="100%" /></div>
               <div className="ad" style={{ marginTop: "0.8rem" }}><img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/c6.jpg" width="100%" /></div>
-            </Col>
+            </Col> */}
             <Col>
               <div>
                 <Divider orientation="left">
@@ -127,7 +127,7 @@ export default function Home(list) {
         <Col className="comm-right" xs={0} sm={0} md={5} lg={5} xl={5}>
           <div className="author-div comm-box">
             <div>
-              <img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/groupchat.jpg"></img>
+              <img style={{width:"100%",height:"100%"}} src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/groupchat.jpg"></img>
               <p>扫一扫加入群聊，与诗友一道谈古论今</p>
             </div>
           </div>

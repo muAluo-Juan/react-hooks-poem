@@ -1,7 +1,11 @@
-import { Tabs, List, Icon, Button, Tag } from 'antd'
+import { Tabs, List, Icon, Button, Tag, message } from 'antd'
 import '../styles/components/myquestion.css'
 import '../styles/components/mywork.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import servicePath from '../config/apiUrl'
+import cookie from 'react-cookies'
+
 const { TabPane } = Tabs
 const IconText = ({ type, text }) => (
     <span>
@@ -9,53 +13,57 @@ const IconText = ({ type, text }) => (
         {text}
     </span>
 )
-const MyQuestion = () => {
-    const pagination = {
-        onChange: page => {
-            console.log(page);
-        },
-        pageSize: 5,
-    }
-    const [answerList, setAnswerList] = useState([{
-        text: "李白号青莲居士，因其诗才，被后世尊称为‘诗仙’。",
-        likeNum: 30,
-        inputTime: 1450842466320,
-        questionUser: '萧慕克',
-        questionName: '李白号什么？',
-        answerId: 4,
-        beAdopted: true
+const pagination = {
+    onChange: page => {
+        console.log(page);
     },
-    {
-        text: "李白号青莲居士，因其诗才，被后世尊称为‘诗仙’。",
-        likeNum: 30,
-        inputTime: 1450842466320,
-        questionUser: '萧慕克',
-        questionName: '李白号什么？',
-        questionId: 4,
-        beAdopted: false
-    }
-    ])
+    pageSize: 5,
+}
 
-    const [questionList, setQuestionList] = useState([{
-        questionId: 4,
-        likeNum: 4,
-        attentionNum: 10,
-        answerNum: 1,
-        text: "李白号什么？",
-        description: "如题。后世对他有称谓吗？",
-        isSolved: 3,
-        inputTime: 1450842466320,
-    }, {
-        questionId: 4,
-        likeNum: 4,
-        attentionNum: 10,
-        answerNum: 1,
-        text: "李白号什么？",
-        description: "如题。后世对他有称谓吗？",
-        isSolved: 0,
-        inputTime: 1450842466320,
-    },
-    ])
+const MyQuestion = () => {
+    const [aqState, setAqState] = useState(0)
+    const [answerList, setAnswerList] = useState([])
+    const [questionList, setQuestionList] = useState([])
+
+    useEffect(()=>{
+        setAqState(0)
+        getAnswerList()
+        getQuestionList()
+    },[aqState])
+
+    function getAnswerList(){
+        axios({
+            method:"get",
+            url: servicePath.getUserAnswerList + cookie.load("user"),
+            withCredentials: true
+        }).then(
+            res=>{
+                if(res.data.code == 200){
+                    console.log("我的回答列表",res.data.data)
+                    setAnswerList(res.data.data)
+                }else{
+                    message.warn("出现未知错误！")
+                }
+            }
+        )
+    }
+
+    function getQuestionList(){
+        axios({
+            method:"get",
+            url: servicePath.getUserQuestionList + cookie.load("user"),
+            withCredentials: true
+        }).then(
+            res=>{
+                if(res.data.code == 200){
+                    console.log("我的提问列表",res.data.data)
+                    setQuestionList(res.data.data)
+                }else{
+                    message.warn("出现未知错误！")
+                }
+            }
+        )
+    }
 
     function gotoQuestionDetail(e) {
         window.open('/questiondetail?questionid=' + e.target.dataset.questionid, '_blank')
@@ -109,7 +117,7 @@ const MyQuestion = () => {
                                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                                     <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                                         <h3 style={{ cursor: "pointer", fontWeight: "bold" }} data-questionid={item.questionId} onClick={gotoQuestionDetail}>{item.text}</h3>
-                                        <Tag style={{ display: item.isSolved != 0 ? "block" : "none" }} color="volcano">问题已解决</Tag>
+                                        <Tag style={{marginLeft:"0.5rem",display: item.isSolved != 0 ? "block" : "none" }} color="volcano">问题已解决</Tag>
                                     </div>
                                     <div className="mywork-title-process">
                                         <Button size="small" type="dashed">删除提问</Button>

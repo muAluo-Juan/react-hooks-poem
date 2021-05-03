@@ -36,6 +36,14 @@ let servicePath = {
     getUserWorkList: ipUrl + 'user/works/', //获取某用户的作品列表
     getUserCollectionList: ipUrl + 'user/collections/', //获取用户的收藏列表
     getUserAttentionList: ipUrl + 'user/attentions/', //获取用户的关注列表
+    getUserAnswerList: ipUrl + 'user/answers/', //获取用户的回答列表
+    getUserQuestionList: ipUrl + 'user/questions/', //获取用户的提问列表
+    getUserFanList: ipUrl + 'user/fans/', //获取用户的粉丝列表
+    getUserDraftList: ipUrl + 'user/drafts/', //获取用户的草稿列表
+    getUserRecycleList: ipUrl + 'user/recycles/', //获取用户的回收列表
+    addWorkOrDraft: ipUrl + 'work/add',  //发布作品或保存草稿
+    updateMyInfo: ipUrl + 'user/update', //修改用户信息
+    updateMyAvatar: ipUrl + 'user/avatar', //修改用户头像
 }
 
 export default servicePath

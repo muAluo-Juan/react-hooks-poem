@@ -16,6 +16,7 @@ import MyQuestion from '../components/MyQuestion'
 import MyAttention from '../components/MyAttention'
 import MyDraft from '../components/MyDraft'
 import MyRecycle from '../components/MyRecycle'
+import MyFans from '../components/MyFans'
 
 const pagination = {
     onChange: page => {
@@ -53,14 +54,12 @@ export default function My() {
                         <div style={{display:choosed=="3"?"block":"none"}}><MyCollect/></div>
                         <div style={{display:choosed=="4"?"block":"none"}}><MyQuestion/></div>
                         <div style={{display:choosed=="5"?"block":"none"}}><MyAttention/></div>
-                        <div style={{display:choosed=="6"?"block":"none"}}><MyDraft/></div>
-                        <div style={{display:choosed=="7"?"block":"none"}}><MyRecycle/></div>
+                        <div style={{display:choosed=="6"?"block":"none"}}><MyFans/></div>
+                        <div style={{display:choosed=="7"?"block":"none"}}><MyDraft/></div>
+                        <div style={{display:choosed=="8"?"block":"none"}}><MyRecycle/></div>
                     </div>
                 </Col>
                 <Col className="comm-right" xs={0} sm={0} md={4} lg={5} xl={5}>
-                    {/* <CommonContext.Provider value={userName}>
-                        <Author />
-                    </CommonContext.Provider> */}
                     <div style={{ marginLeft: "0.6rem" }}>
                         <Menu
                             onClick={handleClick}
@@ -85,14 +84,18 @@ export default function My() {
                                     我的问答
                             </Menu.Item>
                             <Menu.Item key="5">
-                                <Icon type="heart" />
-                                    关注/粉丝
+                                <Icon type="eye" />
+                                    我的关注
                             </Menu.Item>
                             <Menu.Item key="6">
+                                <Icon type="heart" />
+                                    粉丝
+                            </Menu.Item>
+                            <Menu.Item key="7">
                                 <Icon type="file-text" />
                                     草稿箱
                             </Menu.Item>
-                            <Menu.Item key="7">
+                            <Menu.Item key="8">
                                 <Icon type="delete" />
                                     回收站
                             </Menu.Item>

@@ -25,7 +25,7 @@ function WorkList() {
     }else if(chooseNav == "首页"){
       getIndexWork()
     }
-  })
+  },[chooseNav])
 
   const getNewWork = ()=>{
     axios({

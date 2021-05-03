@@ -11,27 +11,29 @@ const Header = (props) => {
     const { Search } = Input //搜索框
     const { SubMenu } = Menu;
     const [registerDisplay, setRegisterDisplay] = useState("block")
-    const {setCookieState} = props
-    const [current,setCurrent] = useState('index')
+    const { setCookieState } = props
+    const [current, setCurrent] = useState('index')
 
     const handlerClickNav = (e) => {
-        if(e.key == 'index')
+        if (e.key == 'index')
             Router.push('/')
         else
             Router.push('/' + e.key)
     }
 
-    useEffect(()=>{
-        let pathname = window.location.pathname.replace("/","")
-        if(pathname == "")
+    useEffect(() => {
+        let pathname = window.location.pathname.replace("/", "")
+        if (pathname == "")
             pathname = "index"
-        else if(pathname == "poemdetail")
+        else if (pathname == "poemdetail")
             pathname = "poem"
-        else if(pathname == "poetdetail")
+        else if (pathname == "poetdetail")
             pathname = "poet"
-        else if(pathname == "communitydetail")
+        else if (pathname == "communitydetail")
             pathname = "community"
-        else if(pathname == "questiondetail")
+        else if (pathname == "creatework")
+            pathname = "community"
+        else if (pathname == "questiondetail")
             pathname = "question"
         setCurrent(pathname)
         console.log(pathname)
@@ -71,9 +73,9 @@ const Header = (props) => {
                     </Menu>
                 </Col>
                 <Col xs={0} sm={0} md={14} lg={10} xl={8}>
-                    <div style={{float:"right",display:"flex",flexDirection:"row",alignItems:"center"}}>
-                        <Login setRegisterDisplay={setRegisterDisplay} setCookieState={setCookieState}/>
-                        <Register registerDisplay={registerDisplay}/>
+                    <div style={{ float: "right", display: "flex", flexDirection: "row", alignItems: "center" }}>
+                        <Login setRegisterDisplay={setRegisterDisplay} setCookieState={setCookieState} />
+                        <Register registerDisplay={registerDisplay} />
                         <Search
                             placeholder="搜索诗词"
                             onSearch={value => console.log(value)}

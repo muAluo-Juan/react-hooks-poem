@@ -32,13 +32,14 @@ const Login = (props) => {
     useEffect(() => {
         let userName = cookie.load("user")
         let token = cookie.load("token")
-        if (userName != undefined && token != undefined && headPicPath != undefined && penName != undefined) {
+        if (userName != undefined && token != undefined) {
             setVisible(false)
             setLoginDisplay("none")
             setRegisterDisplay("none")
             setAvatarDisplay("block")
-            setHeadPicPath(cookie.load("headpicpath"))
-            setPenName(cookie.load("penname"))
+            getLoginMsg()
+            // setHeadPicPath(cookie.load("headpicpath"))
+            // setPenName(cookie.load("penname"))
             setCookieState(true)
         }else{
             setLoginDisplay("block")
@@ -47,6 +48,19 @@ const Login = (props) => {
             setCookieState(false)
         }
     })
+
+    function getLoginMsg(){
+        axios({
+            method:"get",
+            url: servicePath.getWorkUser + cookie.load('user'),
+            withCredentials: true
+        }).then(res=>{
+            if(res.data.code == 200){
+                setHeadPicPath(res.data.data.normaluser.headPicPath)
+                setPenName(res.data.data.normaluser.penName)
+            }
+        })
+    }
 
     const showModal = () => {
         setVisible(true)
@@ -87,8 +101,8 @@ const Login = (props) => {
                     setAvatarDisplay("block")
                     cookie.save('user', res.data.data[0].userName, { path: '/' })
                     cookie.save('token', res.data.data[1], { path: '/' })
-                    cookie.save('penname',res.data.data[0].penName, { path: '/' })
-                    cookie.save('headpicpath',res.data.data[0].headPicPath, { path: '/' })
+                    // cookie.save('penname',res.data.data[0].penName, { path: '/' })
+                    // cookie.save('headpicpath',res.data.data[0].headPicPath, { path: '/' })
                     setCookieState(true)
                     message.success(res.data.message)
                 } else {

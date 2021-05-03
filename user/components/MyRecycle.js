@@ -1,41 +1,40 @@
 import '../styles/components/mywork.css'
 import { Divider,List } from 'antd'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import servicePath from '../config/apiUrl'
+import cookie from 'react-cookies'
+const pagination = {
+    onChange: page => {
+        console.log(page);
+    },
+    pageSize: 5,
+}
 const MyRecycle = () => {
-    const pagination = {
-        onChange: page => {
-            console.log(page);
-        },
-        pageSize: 5,
+    
+    const [listData, setListData] = useState([])
+    const [recycleState, setRecycleState] = useState(0)
+
+    useEffect(()=>{
+        setRecycleState(0)
+        getDraftList()
+    },[recycleState])
+
+    function getDraftList(){
+        axios({
+            method:"get",
+            url: servicePath.getUserRecycleList + cookie.load("user"),
+            withCredentials: true
+        }).then(res=>{
+            if(res.data.code == 200){
+                console.log("回收站",res.data.data)
+                setListData(res.data.data)
+            }else{
+                message.error("出现未知错误！")
+            }
+        })
     }
-    const [listData, setListData] = useState([{
-        likeNum: 10,
-        collectNum: 20,
-        commentNum: 30,
-        title: "声声慢·春慢 独木桥体",
-        workId: 20,
-        modifyTime: 1450842466320,
-        text: '<p>娥眉才画，妆粉初凝，隔春绣帘掀慢。缓下瑶阶，纤月香尘挥慢.</p><p>&nbsp;闲来倚得烟杏，捧新诗、玉葱拨慢。春困染，恼衣沾琼雪，暖风熏慢。</p><p>魂入清熟小梦，小梦里、檀郎傍窗吟慢。</p><p>欲近相扶，惊闻懒莺啼慢。</p><p>揉开惺忪倦眼，已黄昏、斜阳去慢。</p><p>郎未见，只远村、酒旆摇慢。</p><p>鄙人好趣诗趣词已久。前几日偶然读得了数篇窗友佳作，便心驰神往，心痒难耐。</p><p>奈何虽心中跃跃，却苦无灵感。</p><p>今日重读东坡《贺新郎》两句，忽生灵感，便填此《声声慢》，以效颦诸君。</p><p>跋：似乎有好配图比较能吸引人来读，奈何鄙人找图无能，拍照手残，配一张三年前拍的鸢尾助助势吧。<img src="https://gitee.com/muAluo/rainyNightPoemsVue/raw/master/img/w3.jpg" style="max-width: 100%;"></p>'
-    },
-    {
-        likeNum: 10,
-        collectNum: 20,
-        commentNum: 30,
-        title: "声声慢·春慢 独木桥体",
-        workId: 20,
-        modifyTime: 1450842466320,
-        text: '<p>娥眉才画，妆粉初凝，隔春绣帘掀慢。缓下瑶阶，纤月香尘挥慢.</p><p>&nbsp;闲来倚得烟杏，捧新诗、玉葱拨慢。春困染，恼衣沾琼雪，暖风熏慢。</p><p>魂入清熟小梦，小梦里、檀郎傍窗吟慢。</p><p>欲近相扶，惊闻懒莺啼慢。</p><p>揉开惺忪倦眼，已黄昏、斜阳去慢。</p><p>郎未见，只远村、酒旆摇慢。</p><p>鄙人好趣诗趣词已久。前几日偶然读得了数篇窗友佳作，便心驰神往，心痒难耐。</p><p>奈何虽心中跃跃，却苦无灵感。</p><p>今日重读东坡《贺新郎》两句，忽生灵感，便填此《声声慢》，以效颦诸君。</p><p>跋：似乎有好配图比较能吸引人来读，奈何鄙人找图无能，拍照手残，配一张三年前拍的鸢尾助助势吧。<img src="https://gitee.com/muAluo/rainyNightPoemsVue/raw/master/img/w3.jpg" style="max-width: 100%;"></p>'
-    },
-    {
-        likeNum: 10,
-        collectNum: 20,
-        commentNum: 30,
-        title: "声声慢·春慢 独木桥体",
-        workId: 20,
-        modifyTime: 1450842466320,
-        text: '<p>娥眉才画，妆粉初凝，隔春绣帘掀慢。缓下瑶阶，纤月香尘挥慢.</p><p>&nbsp;闲来倚得烟杏，捧新诗、玉葱拨慢。春困染，恼衣沾琼雪，暖风熏慢。</p><p>魂入清熟小梦，小梦里、檀郎傍窗吟慢。</p><p>欲近相扶，惊闻懒莺啼慢。</p><p>揉开惺忪倦眼，已黄昏、斜阳去慢。</p><p>郎未见，只远村、酒旆摇慢。</p><p>鄙人好趣诗趣词已久。前几日偶然读得了数篇窗友佳作，便心驰神往，心痒难耐。</p><p>奈何虽心中跃跃，却苦无灵感。</p><p>今日重读东坡《贺新郎》两句，忽生灵感，便填此《声声慢》，以效颦诸君。</p><p>跋：似乎有好配图比较能吸引人来读，奈何鄙人找图无能，拍照手残，配一张三年前拍的鸢尾助助势吧。<img src="https://gitee.com/muAluo/rainyNightPoemsVue/raw/master/img/w3.jpg" style="max-width: 100%;"></p>'
-    },
-    ])
+
     return (
         <div>
             <List

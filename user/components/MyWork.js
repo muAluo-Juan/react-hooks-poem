@@ -1,7 +1,7 @@
 import '../styles/components/mywork.css'
 import { Divider, Icon, List, message } from 'antd'
 import { useEffect, useState } from 'react'
-import axio from 'axios'
+import axios from 'axios'
 import servicePath from '../config/apiUrl'
 import cookie from 'react-cookies'
 const IconText = ({ type, text }) => (
@@ -33,7 +33,7 @@ const MyWork = () => {
     },[workState])
 
     function getUserWorkList(){
-        axio({
+        axios({
             method:"get",
             url: servicePath.getUserWorkList + cookie.load("user"),
             withCredentials: true

@@ -82,7 +82,7 @@ const PoetDetail = () => {
                 <Col className="comm-right" xs={0} sm={0} md={5} lg={5} xl={5}>
                     <div className="author-div comm-box">
                         <div>
-                            <img src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/groupchat.jpg"></img>
+                            <img style={{width:"100%",height:"100%"}} src="https://raw.githubusercontent.com/muAluo-Juan/react-hooks-poem/master/user/img/groupchat.jpg"></img>
                             <p>扫一扫加入群聊，与诗友一道谈古论今</p>
                         </div>
                     </div>
