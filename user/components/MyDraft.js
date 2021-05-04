@@ -1,22 +1,25 @@
 import '../styles/components/mywork.css'
 import { Divider,List } from 'antd'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
 import cookie from 'react-cookies'
+import CommonContext from './CommonContext'
 const pagination = {
         onChange: page => {
             console.log(page);
         },
         pageSize: 5,
     }
-const MyDraft = () => {
+const MyDraft = (props) => {
     const [draftState, setDraftState] = useState(0)
     const [listData, setListData] = useState([])
+    const { setKidState } = props
+    const kidState = useContext(CommonContext)
     useEffect(()=>{
         setDraftState(0)
         getDraftList()
-    },[draftState])
+    },[draftState,kidState])
 
     function getDraftList(){
         axios({

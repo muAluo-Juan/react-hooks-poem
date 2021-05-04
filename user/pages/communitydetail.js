@@ -54,7 +54,7 @@ export default function CommunityDetail() {
             }).then(
                 res => {
                     if (res.data.code == 200) {
-                        setAttend(attend == 0)
+                        setLike(like==0)
                     } else {
                         message.warn("出现未知错误！")
                     }

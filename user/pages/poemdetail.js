@@ -11,6 +11,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import servicePath from "../config/apiUrl"
 import PoetIntro from "../components/PoetIntro"
+import cookie from 'react-cookies'
 
 const PoemDetail = () => {
 
@@ -47,7 +48,8 @@ const PoemDetail = () => {
         axios({
             method: 'GET',
             url: servicePath.getPoetByUId + poemList[0].authoruid,
-            withCredentials: true
+            withCredentials: true,
+            headers: {"token":cookie.load("token")}
         }).then(
             res =>{
                 setPoets([res.data.data])

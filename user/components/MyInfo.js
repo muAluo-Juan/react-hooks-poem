@@ -1,13 +1,14 @@
 import '../styles/components/myinfo.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import { Avatar, Divider, Tabs, Tag, Input, Radio, DatePicker, Button, message, Upload, Icon } from 'antd'
 import moment from 'moment'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
 import cookie from 'react-cookies'
+import CommonContext from './CommonContext'
 const dateFormat = 'YYYY/MM/DD'
 
-const MyInfo = () => {
+const MyInfo = (props) => {
     const [infoState, setInfoState] = useState(0)
     const [headPicPath, setHeadPicPath] = useState()
     const [penName, setPenName] = useState()
@@ -21,6 +22,12 @@ const MyInfo = () => {
     const [tempBirth, setTempBirth] = useState(null)
     const [loading, setLoading] = useState(false)
     const [oPenName, setOPenName] = useState()
+    const [oldPwd, setOldPwd] = useState()
+    const [newPwd, setNewPwd] = useState()
+    const [confirmPwd, setConfirmPwd] = useState()
+    const [modifyPwd, setModifyPwd] = useState(false)
+    const { setKidState } = props
+    const kidState = useContext(CommonContext)
     const uploadButton = (
         <div>
             <Icon type={loading ? 'loading' : 'plus'} />
@@ -31,7 +38,7 @@ const MyInfo = () => {
     useEffect(() => {
         getMyInfo()
         setInfoState(0)
-    }, [infoState])
+    }, [infoState,kidState])
 
     function getMyInfo() {
         axios({
@@ -40,7 +47,7 @@ const MyInfo = () => {
             withCredentials: true
         }).then(res => {
             if (res.data.code == 200) {
-                console.log("个人信息",res.data.data)
+                console.log("个人信息", res.data.data)
                 setHeadPicPath(res.data.data.normaluser.headPicPath)
                 setGrade(res.data.data.grade)
                 setRewardPoints(res.data.data.normaluser.rewardPoints)
@@ -144,6 +151,54 @@ const MyInfo = () => {
         })
     }
 
+    function modifyPassword() {
+        setModifyPwd(true)
+        //判断确认密码是否一致
+        if(oldPwd == '' || newPwd == '' || confirmPwd == '' || oldPwd == null || newPwd == null || confirmPwd == null){
+            message.warn("请按要求输入密码！")
+            return
+        }
+        if(confirmPwd != newPwd){
+            message.warn("确认密码不一致！")
+            setConfirmPwd()
+            setNewPwd()
+            return
+        }else{
+            const dataProps = {
+                oldPassword: oldPwd,
+                newPassword: newPwd
+            }
+            axios({
+                method: "put",
+                url: servicePath.modifyMyPassword,
+                data: dataProps,
+                withCredentials: true,
+                headers: {"token": cookie.load("token")}
+            }).then(
+                res=>{
+                    if(res.data.code == 202)
+                    {
+                        message.error("旧密码错误！")
+                        setNewPwd()
+                        setConfirmPwd()
+                    }else if(res.data.code == 200){
+                        message.success("密码修改成功，下次登录时生效！")
+                        setNewPwd()
+                        setConfirmPwd()
+                        setOldPwd()
+                        setModifyPwd(false)
+                    }else{
+                        message.error("修改失败，出现未知错误！")
+                        setNewPwd()
+                        setConfirmPwd()
+                        setOldPwd()
+                        setModifyPwd(false)
+                    }
+                }
+            )
+        }
+    }
+
     return (
         <div>
             <div className="myinfo-avatar-div">
@@ -202,12 +257,32 @@ const MyInfo = () => {
                 <div style={{ width: "7rem" }}>用&nbsp;&nbsp;户&nbsp;&nbsp;名</div>
                 <Input placeholder="未填写" disabled value={userName} style={{ color: "black", width: "30.5rem", height: "2.2rem" }} />
             </div>
-            <div className="myinfo-input">
-                <div style={{ width: "7rem" }}>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</div>
-                <Input disabled placeholder="未填写" type="password" value="123456" style={{ color: "black", width: "30.5rem", height: "2.2rem" }} />
+            <div>
+                <div style={{ display: modifyPwd ? 'none' : 'block' }}>
+                    <div className="myinfo-input">
+                        <div style={{ width: "7rem" }}>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</div>
+                        <Input disabled placeholder="未填写" type="password" value="123456" style={{ color: "black", width: "30.5rem", height: "2.2rem" }} />
+                    </div>
+                </div>
+                <div style={{ display: modifyPwd ? 'block' : 'none' }}>
+                    <div className="myinfo-input">
+                        <div style={{ width: "7rem" }}>旧&nbsp;&nbsp;密&nbsp;&nbsp;码</div>
+                        <Input placeholder="请输入原始密码" type="password" value={oldPwd} onChange={e => setOldPwd(e.target.value)} style={{ color: "black", width: "30.5rem", height: "2.2rem" }} />
+                    </div>
+                    <div className="myinfo-input">
+                        <div style={{ width: "7rem" }}>新&nbsp;&nbsp;密&nbsp;&nbsp;码</div>
+                        <Input placeholder="请输入新密码" type="password" value={newPwd} onChange={e => setNewPwd(e.target.value)} style={{ color: "black", width: "30.5rem", height: "2.2rem" }} />
+                    </div>
+                    <div className="myinfo-input">
+                        <div style={{ width: "7rem" }}>确认密码</div>
+                        <Input placeholder="请输入确认密码" type="password" value={confirmPwd} onChange={e => setConfirmPwd(e.target.value)} style={{ color: "black", width: "30.5rem", height: "2.2rem" }} />
+                    </div>
+
+                </div>
             </div>
             <div style={{ float: "right", marginBottom: "0.5rem" }}>
-                <Button type="primary">修改密码</Button>
+                <Button type="primary" onClick={()=>setModifyPwd(true)} style={{ display: modifyPwd ? 'none' : 'block' }}>修改密码</Button>
+                <Button type="primary" onClick={modifyPassword} style={{ display: modifyPwd ? 'block' : 'none' }}>保存修改</Button>
             </div>
         </div>
     )

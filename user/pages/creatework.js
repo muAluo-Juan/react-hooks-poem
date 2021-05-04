@@ -6,6 +6,7 @@ import Head from 'next/head'
 import Author from '../components/Author'
 import CommonContext from '../components/CommonContext'
 import cookie from 'react-cookies'
+import Router from 'next/router'
 
 export default function CreateWork() {
     const [cookieState, setCookieState] = useState(false)
@@ -14,6 +15,10 @@ export default function CreateWork() {
     useEffect(()=>{
         setUserName(cookie.load("user"))
     })
+
+    function gotoMy(){
+        Router.push("/my")
+    }
 
     return (
         <div>
@@ -32,7 +37,7 @@ export default function CreateWork() {
                         <Author />
                     </CommonContext.Provider>
                     <div className="author-div comm-box extra">
-                        <Button type="primary" icon="profile">个人主页</Button>
+                        <Button type="primary" icon="profile" onClick={gotoMy}>个人主页</Button>
                     </div>
                 </Col>
             </Row>

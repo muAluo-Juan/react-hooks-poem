@@ -132,11 +132,12 @@ const Login = (props) => {
 
     function handleMenuClick(e) {
         if(e.key == 1){
-            message.success("去写作页面")
+            Router.push('/creatework')
         }else if(e.key == 2){
             Router.push("/my")
         }
         else if(e.key == 3) {
+            Router.push("/")
             message.success('登出成功');
             cookie.remove("user")
             cookie.remove("token")

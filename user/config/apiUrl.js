@@ -44,6 +44,9 @@ let servicePath = {
     addWorkOrDraft: ipUrl + 'work/add',  //发布作品或保存草稿
     updateMyInfo: ipUrl + 'user/update', //修改用户信息
     updateMyAvatar: ipUrl + 'user/avatar', //修改用户头像
+    modifyMyPassword: ipUrl + 'user/password', //修改用户密码
+    deleteUserWork: ipUrl + 'user/work/delete/', //删除用户作品
+    updateUserWork: ipUrl + 'user/work/update', //更新用户作品
 }
 
 export default servicePath

@@ -31,8 +31,6 @@ const Header = (props) => {
             pathname = "poet"
         else if (pathname == "communitydetail")
             pathname = "community"
-        else if (pathname == "creatework")
-            pathname = "community"
         else if (pathname == "questiondetail")
             pathname = "question"
         setCurrent(pathname)

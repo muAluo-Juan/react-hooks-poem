@@ -30,10 +30,12 @@ export default function My() {
     const [loginUser, setLoginUser] = useState({})
     const [userName, setUserName] = useState('')
     const [choosed, setChoosed] = useState("1")
+    const [kidState, setKidState] = useState(0)
 
     useEffect(() => {
         setUserName(cookie.load("user"))
-    }, [])
+        setKidState(0)
+    }, [kidState])
 
     const handleClick = e => {
         console.log('click ', e);
@@ -49,14 +51,46 @@ export default function My() {
             <Row className="comm-main" type="flex" justify="center">
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={16} xl={16}>
                     <div className="my-left-content">
-                        <div style={{display:choosed=="1"?"block":"none"}}><MyInfo/></div>
-                        <div style={{display:choosed=="2"?"block":"none"}}><MyWork/></div>
-                        <div style={{display:choosed=="3"?"block":"none"}}><MyCollect/></div>
-                        <div style={{display:choosed=="4"?"block":"none"}}><MyQuestion/></div>
-                        <div style={{display:choosed=="5"?"block":"none"}}><MyAttention/></div>
-                        <div style={{display:choosed=="6"?"block":"none"}}><MyFans/></div>
-                        <div style={{display:choosed=="7"?"block":"none"}}><MyDraft/></div>
-                        <div style={{display:choosed=="8"?"block":"none"}}><MyRecycle/></div>
+                        <div style={{ display: choosed == "1" ? "block" : "none" }}>
+                            <CommonContext.Provider value={kidState}>
+                                <MyInfo setKidState={setKidState} />
+                            </CommonContext.Provider>
+                        </div>
+                        <div style={{ display: choosed == "2" ? "block" : "none" }}>
+                            <CommonContext.Provider value={kidState}>
+                                <MyWork setKidState={setKidState} />
+                            </CommonContext.Provider>
+                        </div>
+                        <div style={{ display: choosed == "3" ? "block" : "none" }}>
+                            <CommonContext.Provider value={kidState}>
+                                <MyCollect setKidState={setKidState} />
+                            </CommonContext.Provider>
+                        </div>
+                        <div style={{ display: choosed == "4" ? "block" : "none" }}>
+                            <CommonContext.Provider value={kidState}>
+                                <MyQuestion setKidState={setKidState} />
+                            </CommonContext.Provider>
+                        </div>
+                        <div style={{ display: choosed == "5" ? "block" : "none" }}>
+                            <CommonContext.Provider value={kidState}>
+                                <MyAttention setKidState={setKidState} />
+                            </CommonContext.Provider>
+                        </div>
+                        <div style={{ display: choosed == "6" ? "block" : "none" }}>
+                            <CommonContext.Provider value={kidState}>
+                                <MyFans setKidState={setKidState} />
+                            </CommonContext.Provider>
+                        </div>
+                        <div style={{ display: choosed == "7" ? "block" : "none" }}>
+                            <CommonContext.Provider value={kidState}>
+                                <MyDraft setKidState={setKidState} />
+                            </CommonContext.Provider>
+                        </div>
+                        <div style={{ display: choosed == "8" ? "block" : "none" }}>
+                            <CommonContext.Provider value={kidState}>
+                                <MyRecycle setKidState={setKidState} />
+                            </CommonContext.Provider>
+                        </div>
                     </div>
                 </Col>
                 <Col className="comm-right" xs={0} sm={0} md={4} lg={5} xl={5}>

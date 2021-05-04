@@ -1,26 +1,28 @@
 import '../styles/components/mywork.css'
 import { Divider,List } from 'antd'
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useContext } from 'react'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
 import cookie from 'react-cookies'
+import CommonContext from './CommonContext'
 const pagination = {
     onChange: page => {
         console.log(page);
     },
     pageSize: 5,
 }
-const MyRecycle = () => {
+const MyRecycle = (props) => {
     
     const [listData, setListData] = useState([])
     const [recycleState, setRecycleState] = useState(0)
-
+    const { setKidState } = props
+    const kidState = useContext(CommonContext)
     useEffect(()=>{
         setRecycleState(0)
-        getDraftList()
-    },[recycleState])
+        getRecycleList()
+    },[recycleState,kidState])
 
-    function getDraftList(){
+    function getRecycleList(){
         axios({
             method:"get",
             url: servicePath.getUserRecycleList + cookie.load("user"),

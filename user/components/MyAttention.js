@@ -1,8 +1,9 @@
 import { Tabs, List, Button, Avatar, message, Tag, Icon } from 'antd'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
 import cookie from 'react-cookies'
+import CommonContext from './CommonContext'
 const { TabPane } = Tabs
 const IconText = ({ type, text }) => (
     <span>
@@ -16,15 +17,16 @@ const pagination = {
     },
     pageSize: 5,
 }
-const MyAttention = () => {
+const MyAttention = (props) => {
     const [questions, setQuestions] = useState([])
     const [users, setUsers] = useState([])
     const [attentionState, setAttentionState] = useState(0)
-
+    const { setKidState } = props
+    const kidState = useContext(CommonContext)
     useEffect(() => {
         setAttentionState(0)
         getAttentionList()
-    }, [attentionState])
+    }, [attentionState,kidState])
 
     function getAttentionList() {
         axios({

@@ -1,11 +1,11 @@
 import { Tabs, List, Icon, Button, Tag, message } from 'antd'
 import '../styles/components/myquestion.css'
 import '../styles/components/mywork.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
 import cookie from 'react-cookies'
-
+import CommonContext from './CommonContext'
 const { TabPane } = Tabs
 const IconText = ({ type, text }) => (
     <span>
@@ -20,16 +20,17 @@ const pagination = {
     pageSize: 5,
 }
 
-const MyQuestion = () => {
+const MyQuestion = (props) => {
     const [aqState, setAqState] = useState(0)
     const [answerList, setAnswerList] = useState([])
     const [questionList, setQuestionList] = useState([])
-
+    const { setKidState } = props
+    const kidState = useContext(CommonContext)
     useEffect(()=>{
         setAqState(0)
         getAnswerList()
         getQuestionList()
-    },[aqState])
+    },[aqState,kidState])
 
     function getAnswerList(){
         axios({

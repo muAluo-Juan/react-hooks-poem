@@ -1,17 +1,18 @@
 import { Tabs, List, Button, Avatar, message, Tag, Icon } from 'antd'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
 import cookie from 'react-cookies'
-
-const MyFans = () => {
+import CommonContext from './CommonContext'
+const MyFans = (props) => {
     const [fans, setFans] = useState([])
     const [fansState, setFansState] = useState(0)
-
+    const { setKidState } = props
+    const kidState = useContext(CommonContext)
     useEffect(() => {
         setFansState(0)
         getFansList()
-    }, [fansState])
+    }, [fansState,kidState])
 
     function getFansList() {
         axios({
